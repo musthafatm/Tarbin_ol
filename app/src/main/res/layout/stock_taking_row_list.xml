@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:id="@+id/card_view2"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_normal"
+        card_view:cardBackgroundColor="#AA66CC"
+        android:layout_height="80dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvStockPaintName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="@string/asian_paints"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_normal" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPaintDescriptionRed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:text="@string/apex_duracast_pebbletex"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/font_tiny" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/padding_small"
+                        android:id="@+id/tvLitre"
+                        android:text="10 ltr"
+                        android:paddingEnd="@dimen/padding_small"
+                        android:textColor="@color/text_very_dark"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/countLinearLayout"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/margin_medium">
+
+                        <TextView
+                    android:id="@+id/tvRequired"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/padding_small"
+                    android:text="@string/required"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:maxLines="1"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/font_small" />
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/et_required_paint"
+                            android:editable="true"
+                            android:text="00"
+                            android:textAlignment="center"
+                            android:textColor="@color/text_very_dark"
+                            android:textSize="@dimen/font_medium"
+                            android:background="@drawable/rounded_edit_text_stock_taking"/>
+
+                    </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/margin_large">
+
+                    <TextView
+                        android:id="@+id/tvIn_Stock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/padding_small"
+                        android:text="@string/in_stock"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:maxLines="1"
+                        android:textColor="@color/text_dark"
+                        android:textSize="@dimen/font_small"/>
+
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/et_paint_inStock"
+                        android:editable="true"
+                        android:text="00"
+                        android:textAlignment="center"
+                        android:textColor="@color/text_very_dark"
+                        android:textSize="@dimen/font_medium"
+                        android:background="@drawable/rounded_edit_text_stock_taking"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

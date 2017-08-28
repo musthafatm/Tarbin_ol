@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/AppTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/list_grad"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.iroid.tarbinol.ui.LoginActivity">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin_huge"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/margin_large"
+        android:paddingEnd="@dimen/margin_large">
+
+
+        <EditText
+            android:id="@+id/etUserId"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="@dimen/margin_extra_large"
+            android:background="@drawable/rounded_edittext"
+            android:drawableLeft="@drawable/ic_id"
+            android:drawablePadding="33dp"
+            android:hint="@string/prompt_userId"
+            android:textColorHint="@color/white"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/login_text" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="@string/prompt_password"
+            android:drawableLeft="@drawable/ic_padlock"
+            android:drawablePadding="33dp"
+            android:textColorHint="@color/white"
+            android:imeActionId="@+id/login"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/login_text"/>
+
+
+        <Button
+            android:id="@+id/login_button"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:layout_marginTop="@dimen/margin_extra_large"
+            android:background="@drawable/rounded_login_button"
+
+            android:text="@string/action_login_short"
+            android:textSize="@dimen/font_large"
+            android:textColor="@color/login_text"
+            android:textStyle="bold" />
+        //android:background="@color/login_button"
+
+
+    </LinearLayout>
+
+</LinearLayout>

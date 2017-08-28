@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/list_grad"
+    tools:context="com.iroid.tarbinol.ui.CheckinActivity">
+
+    <include layout="@layout/tool_bar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/margin_very_large"
+        android:layout_marginEnd="@dimen/margin_very_large">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvCheckInShopName"
+            android:layout_marginTop="@dimen/margin_very_large"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:id="@+id/tvCheckInShopDescription"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:drawableLeft="@drawable/ic_place_localizer"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvcheckInDate"
+                android:textSize="@dimen/font_small"
+                android:drawableLeft="@drawable/ic_calendar"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvcheckInTime"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:textSize="@dimen/font_small"
+                android:drawableLeft="@drawable/ic_clock"/>
+
+
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:background="@color/darkgreen"
+            android:layout_marginTop="@dimen/margin_extra_large"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:layout_height="0.5dp">
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/checkin_button"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:layout_marginTop="@dimen/margin_extra_large"
+            android:background="@drawable/rounded_login_button"
+
+            android:text="@string/action_checkin"
+            android:textSize="@dimen/font_normal"
+            android:textColor="@color/login_text"
+            android:textStyle="bold" />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

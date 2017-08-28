@@ -1,0 +1,114 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:Android="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.Android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.Android.com/apk/res-auto"
+        android:id="@+id/card_view1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_medium"
+
+        android:layout_marginTop="@dimen/margin_normal"
+        card_view:cardBackgroundColor="#AA66CC"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/dashBoardShopName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/padding_small"
+                    android:text="@string/keralahardwareshop"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_normal" />
+
+                <TextView
+                    android:id="@+id/dashBoardLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_place_localizer_white"
+                    android:drawablePadding="@dimen/spacing_tiny"
+                    android:gravity="center|left"
+                    android:text="@string/dashboardLocation"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/font_tiny" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/temp"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvCheckedInTick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/padding_small"
+                    android:text="@string/checkedin_visible"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:drawableRight="@drawable/ic_tick"
+                    android:drawablePadding="@dimen/padding_normal"
+                    android:textSize="@dimen/font_normal" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvTick_Date"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_calendar_white"
+                    android:drawablePadding="@dimen/spacing_tiny"
+                    android:gravity="center|left"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/font_tiny" />
+
+                <TextView
+                    android:id="@+id/tvTick_Time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_clock_white"
+                    android:drawablePadding="@dimen/spacing_tiny"
+                    android:gravity="center|left"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/font_tiny" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
