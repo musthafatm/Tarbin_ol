@@ -28,9 +28,12 @@ public class DashboardActivity extends AppCompatActivity {
         String day = extras.getString("DAY");
         String location = extras.getString("LOCATION");
 
+        String dayCamel = toCamelCase(day);
+        String locationCamel = toCamelCase(location);
 
-        getSupportActionBar().setTitle(day);
-        getSupportActionBar().setSubtitle(location);
+
+        getSupportActionBar().setTitle(dayCamel);
+        getSupportActionBar().setSubtitle(locationCamel);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -61,4 +64,28 @@ public class DashboardActivity extends AppCompatActivity {
         adapter.addFragment(new PendingTaskFragment(),"Pending Task");
         viewPager.setAdapter(adapter);
     }
+
+// Below function is to convert a string to camel case
+    public static String toCamelCase(final String init) {
+        if (init==null)
+            return null;
+
+        final StringBuilder ret = new StringBuilder(init.length());
+
+        for (final String word : init.split(" ")) {
+            if (!word.isEmpty()) {
+                ret.append(word.substring(0, 1).toUpperCase());
+                ret.append(word.substring(1).toLowerCase());
+            }
+            if (!(ret.length()==init.length()))
+                ret.append(" ");
+        }
+
+        return ret.toString();
+    }
+
+
+
+
+
 }

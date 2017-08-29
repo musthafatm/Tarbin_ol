@@ -68,7 +68,12 @@ public class ExecutiveNameActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
+        //If we need settings button; uncomment the following
+
+/*
         getMenuInflater().inflate(R.menu.executive_name, menu);
+*/
         return true;
     }
 

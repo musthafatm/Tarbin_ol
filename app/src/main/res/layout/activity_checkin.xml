@@ -14,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginStart="@dimen/margin_very_large"
-        android:layout_marginEnd="@dimen/margin_very_large">
+        android:layout_marginStart="@dimen/margin_extra_large"
+        android:layout_marginEnd="@dimen/margin_extra_large">
 
 
         <TextView
@@ -24,6 +24,7 @@
             android:id="@+id/tvCheckInShopName"
             android:textColor="@color/white"
             android:textSize="@dimen/font_very_large"
+            android:paddingStart="@dimen/padding_normal"
             android:layout_marginTop="@dimen/margin_very_large"/>
 
         <TextView
@@ -34,7 +35,9 @@
             android:textColor="@color/white"
             android:text="Lorem Ipsum is simply text of the printing and typesetting industry."
             android:layout_marginBottom="@dimen/spacing_large"
-            android:drawableLeft="@drawable/ic_place_localizer"/>
+            android:drawableLeft="@drawable/ic_place_localizer"
+            android:gravity="center|left"
+            android:drawablePadding="@dimen/padding_normal"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -48,15 +51,19 @@
                 android:id="@+id/tvcheckInDate"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_small"
-                android:drawableLeft="@drawable/ic_calendar"/>
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:drawableLeft="@drawable/ic_calendar"
+                android:gravity="center|left"
+                android:drawablePadding="@dimen/padding_normal"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvcheckInTime"
-                android:layout_marginLeft="@dimen/spacing_large"
                 android:textSize="@dimen/font_small"
                 android:textColor="@color/white"
-                android:drawableLeft="@drawable/ic_clock"/>
+                android:drawableLeft="@drawable/ic_clock"
+                android:gravity="center|left"
+                android:drawablePadding="@dimen/padding_normal"/>
 
 
         </LinearLayout>
@@ -64,6 +71,8 @@
             android:layout_width="match_parent"
             android:background="@color/darkgreen"
             android:layout_marginTop="@dimen/margin_extra_large"
+            android:layout_marginStart="@dimen/margin_very_small"
+            android:layout_marginEnd="@dimen/margin_normal"
             android:layout_marginBottom="@dimen/margin_medium"
             android:layout_height="0.5dp">
         </FrameLayout>
@@ -82,6 +91,8 @@
             android:textSize="@dimen/font_normal"
             android:textColor="@color/login_text"
             android:textStyle="bold" />
+        <!--android:drawablePadding="-4dp"-->
+
 
 
 
