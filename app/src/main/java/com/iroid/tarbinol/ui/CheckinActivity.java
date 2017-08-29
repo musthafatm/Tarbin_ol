@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.iroid.tarbinol.R;
@@ -20,9 +21,10 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
     private static final int REQUEST_CANCEL = 121;
     private TextView mtvCheckInShopName;
     private TextView mtvCheckInShopDescription;
-    private Button mcheckinButton = null;
+//    private Button mcheckinButton = null;
     private TextView mtvCheckInDate;
     private TextView mtvCheckInTime;
+    private RelativeLayout mcheckInRelative;
 
     private Toolbar mToolbar;
 
@@ -38,7 +40,7 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
         mtvCheckInShopDescription = (TextView) findViewById(R.id.tvCheckInShopDescription);
         mtvCheckInDate = (TextView) findViewById(R.id.tvcheckInDate);
         mtvCheckInTime = (TextView) findViewById(R.id.tvcheckInTime);
-        mcheckinButton = (Button) findViewById(R.id.checkin_button);
+        mcheckInRelative = (RelativeLayout) findViewById(R.id.checkInRelative);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
@@ -59,7 +61,7 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
         mtvCheckInDate.setText(currentDate);
         mtvCheckInTime.setText(currentTime);
 
-        mcheckinButton.setOnClickListener(this);
+        mcheckInRelative.setOnClickListener(this);
 
 
 
