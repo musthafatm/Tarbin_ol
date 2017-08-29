@@ -85,6 +85,16 @@ public class ShopVisitFragment extends Fragment {
             switch (resultCode) {
                 case AppCompatActivity.RESULT_OK:
 
+                    Bundle extras = data.getExtras();
+                    int list_id = extras.getInt("list_id");
+
+                    if (shopVisitModelList!=null&& shopVisitModelList.size()>0) {
+                        ShopVisitModel shopVisitModel = shopVisitModelList.get(list_id);
+
+                        shopVisitModel.setPlaced(true);
+                        mAdapter.notifyDataSetChanged();
+                    }
+
                     break;
             }
         }
