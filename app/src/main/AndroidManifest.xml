@@ -34,7 +34,7 @@
             android:name=".ui.ExecutiveNameActivity"
             android:label="@string/title_activity_executive_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.DashboardActivity" />
+        <activity android:name=".ui.DashboardActivity"/>
         <activity
             android:name=".ui.CheckinActivity"
             android:label="@string/title_activity_checkin_title" />
