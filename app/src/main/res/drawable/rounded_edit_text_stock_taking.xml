@@ -8,7 +8,7 @@
         android:topRightRadius="15dp"/>
 
     <size android:width="63dp" android:height="6dp"/>
-    <solid android:color="#eaeaea" />
+    <solid android:color="#fff" />
 
 
     <!--<padding-->

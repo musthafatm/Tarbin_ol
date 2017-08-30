@@ -42,6 +42,7 @@ public class StockTakingRecyclerAdapter extends RecyclerView.Adapter<StockTaking
 
 
         holder.et_required_paint.setText(stockTakingModel.getEt_required_paint());
+//        holder.et_required_paint.setShadowLayer(15,7,3,R.color.text_very_dark);
         holder.et_paint_inStock.setText(stockTakingModel.getEt_paint_inStock());
 
     }
