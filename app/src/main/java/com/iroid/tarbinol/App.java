@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends Application {
 
-    public static final String BASE_URL = "http://54.201.67.32/rest/";
+    public static final String BASE_URL = "http://iroidtech.com/seapplication/";
 
     static OkHttpClient.Builder httpClient = null;
 
