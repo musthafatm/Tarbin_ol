@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.iroid.tarbinol.App;
@@ -26,14 +27,12 @@ import static android.Manifest.permission.READ_CONTACTS;
 import static android.graphics.Color.YELLOW;
 import static com.iroid.tarbinol.utils.CommonUtils.showToast;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText metUserId;
     private EditText metPassword;
     private Button mloginButton = null;
 
-
-    Call<JsonObject> call ;
     WebService webService;
 
     @Override
@@ -47,7 +46,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         webService = App.getClient().create(WebService.class);
-//        Call<JsonObject> call ;
 
 
 
@@ -58,34 +56,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
 
 
-        if (metUserId.getText().toString() == "" || metPassword.getText().toString() == "") {
-            showToast(getApplicationContext(), "Logged in successfully");
-        } else {
-            call = webService.login(metUserId.getText().toString(), metPassword.getText().toString());
-            call.enqueue(new Callback<JsonObject>() {
-                @Override
-                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                    if (response.isSuccessful()) {
-                        showToast(getApplicationContext(), "Logged in successfully");
-                        Intent intent = new Intent(getApplicationContext(), ExecutiveNameActivity.class);
-                        startActivity(intent);
-                    }
-                }
-
-
-                @Override
-                public void onFailure(Call<JsonObject> call, Throwable t) {
-
-                    Response<JsonObject> responses = null;
-                    if (!(responses.isSuccessful())) {
-                        showToast(getApplicationContext(), responses.message());
-
-                    }
-                }
-            });
-
-
+        String s1 = metUserId.getText().toString();
+        String s2 = metPassword.getText().toString();
+        if (s1.equals("")) {
+            metUserId.setError("Enter User Name");
         }
+        if (s2.equals("")) {
+            metPassword.setError("Enter Password");
+        }
+
+        Call<JsonObject> call = webService.login(s1, s2);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                if (response.isSuccessful()) {
+                    JsonObject jsonObj = response.body();
+                    String status = jsonObj.get("status").getAsString();
+                    if(status.equals("success")) {
+                        showToast(LoginActivity.this, "Logged in successfully");
+                        Intent intent = new Intent(LoginActivity.this, ExecutiveNameActivity.class);
+                        startActivity(intent);
+                    }else{
+                        String msg = jsonObj.get("message").getAsString();
+                        CommonUtils.showToast(getApplicationContext(), msg);
+                    }
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+//          ON ERROR COMMENT THE BELOW CODES
+//                Response<JsonObject> responses = null;
+//                if (!(responses.isSuccessful())) {             responses.message()
+                    showToast(LoginActivity.this, "No_Network_ACCESS");
+//
+//                }
+            }
+        });
     }
+
 }
 

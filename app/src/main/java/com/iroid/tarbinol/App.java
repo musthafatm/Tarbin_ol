@@ -16,14 +16,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends Application {
 
-    public static final String BASE_URL = "http://iroidtech.com/seapplication/";
-
+    public static final String BASE_URL = "http://iroidtech.com/seapplication/index.php/";
     static OkHttpClient.Builder httpClient = null;
-
     private static Retrofit retrofit = null;
-
     public static Retrofit getClient() {
-
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -33,8 +29,6 @@ public class App extends Application {
         }
         return retrofit;
     }
-
-
     @Override
     public void onCreate() {
         super.onCreate();

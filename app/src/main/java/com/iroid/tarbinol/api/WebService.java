@@ -16,10 +16,10 @@ import retrofit2.http.Query;
 public interface WebService {
 
     @FormUrlEncoded
-    @POST("/Salesexcutive/login")
+    @POST("Salesexcutive/login")
     Call<JsonObject> login(@Field("username") String userName, @Field("password")  String password);
 
-    @GET("/Salesexcutive/login")
+    @GET("Salesexcutive/login")
     Call<JsonObject> loginResponse(@Query("username") String userName, @Query("password")  String password);
 
 }
