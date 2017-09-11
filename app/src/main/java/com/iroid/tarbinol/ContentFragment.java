@@ -79,10 +79,13 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
                     if(status.equals("success")) {
 
                         List<DayItem> dayItems = new ArrayList<DayItem>();
-                        JsonArray jsonArray = jsonObj.getAsJsonArray();
+//                        JsonArray jsonArray = jsonObj.getAsJsonArray();
+                        JsonArray jsonArray = jsonObj.get("data").getAsJsonArray();
                        for (int i = 0; i < jsonArray.size(); i++){
 
-                           JsonObject jsonObject = jsonArray.getAsJsonObject();
+//                           JsonObject jsonObject = jsonArray.getAsJsonObject();
+                           JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
+
 
 
 //                           dayItems.add(new DayItem(jsonObject.get("days").getAsString(), jsonObject.get("location").getAsString()));

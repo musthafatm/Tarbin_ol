@@ -1,45 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/mondayLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/margin_extra_large"
         android:layout_marginBottom="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_extra_large"
-        android:clickable="true">
+        android:clickable="true"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/margin_extra_large">
 
         <TextView
             android:id="@+id/tvMonday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/monday"
             android:paddingStart="@dimen/padding_small"
-            android:textSize="@dimen/font_small"
-            android:textColor="@color/white" />
+            android:text="@string/monday"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_small" />
 
 
         <TextView
             android:id="@+id/mondayLocal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/palarivattom"
-            android:gravity="center|left"
-            android:textSize="@dimen/font_tiny"
-            android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
             android:drawableLeft="@drawable/ic_placeholder"
-            android:drawableRight="@drawable/ic_keyboard_arrow_right_white_24dp"
             android:drawablePadding="@dimen/spacing_tiny"
-            android:textColor="@color/white" />
+            android:drawableRight="@drawable/ic_keyboard_arrow_right_white_24dp"
+            android:gravity="center|left"
+            android:text="@string/palarivattom"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_tiny" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:background="@color/darkgreen"
-            android:layout_height="0.5dp">
+            android:layout_height="0.5dp"
+            android:background="@color/darkgreen">
 
         </FrameLayout>
 

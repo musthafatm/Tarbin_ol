@@ -1,5 +1,6 @@
 package com.iroid.tarbinol.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +11,14 @@ import android.widget.TextView;
 import com.iroid.tarbinol.R;
 import com.iroid.tarbinol.model.DayItem;
 import com.iroid.tarbinol.model.ShopVisitModel;
+import com.iroid.tarbinol.ui.DashboardActivity;
+import com.iroid.tarbinol.ui.ExecutiveNameActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by Acer on 25-Aug-17.
@@ -73,12 +78,15 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
                 public void onClick(View v) {
                     if (onItemClickListener!=null) {
                         onItemClickListener.onItemClicked(dayItemList.get(getAdapterPosition()),getAdapterPosition());
+
                     }
                 }
             });
 
         }
     }
+
+
 
 
 }

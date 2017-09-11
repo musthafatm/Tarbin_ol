@@ -1,48 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/list_grad"
-    android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.iroid.tarbinol.ui.ExecutiveNameActivity"
-    android:scrollbars="vertical">
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@drawable/list_grad"-->
+    <!--android:orientation="vertical"-->
+    <!--android:scrollbars="vertical"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+    <!--tools:context="com.iroid.tarbinol.ui.ExecutiveNameActivity">-->
+
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@drawable/list_grad"
+        android:orientation="vertical"
+
+        tools:context="com.iroid.tarbinol.ui.ExecutiveNameActivity">
+        <!--android:scrollbars="vertical"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/margin_extra_large"
-            android:layout_marginTop="@dimen/margin_large"
             android:layout_marginBottom="@dimen/margin_large"
-            android:layout_marginRight="@dimen/margin_extra_large">
+            android:layout_marginRight="@dimen/margin_extra_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/margin_extra_large">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/select_your_route"
                 android:paddingStart="@dimen/padding_small"
+                android:text="@string/select_your_route"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_normal" />
 
         </LinearLayout>
 
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvDay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-     <android.support.v7.widget.RecyclerView
-         android:id="@+id/rvDay"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content">
-
-
-
-     </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
 
 
         <!--</LinearLayout>-->
@@ -51,4 +58,4 @@
     </LinearLayout>
 
 
-</ScrollView>
+<!--</ScrollView>-->
