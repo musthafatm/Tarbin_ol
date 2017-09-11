@@ -12,9 +12,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.iroid.tarbinol.ContentFragment;
 import com.iroid.tarbinol.R;
+import com.iroid.tarbinol.utils.CommonUtils;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.iroid.tarbinol.ui.LoginActivity.call;
+import static com.iroid.tarbinol.ui.LoginActivity.empId;
+import static com.iroid.tarbinol.ui.LoginActivity.webService;
+import static com.iroid.tarbinol.utils.CommonUtils.showToast;
 
 public class ExecutiveNameActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,7 +56,11 @@ public class ExecutiveNameActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+//        TextView tv = (TextView) findViewById(R.id.tvMonday);
+
+
         loadFirstFrame();
+
     }
 
 

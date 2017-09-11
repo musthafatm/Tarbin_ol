@@ -19,6 +19,13 @@ public interface WebService {
     @POST("Salesexcutive/login")
     Call<JsonObject> login(@Field("username") String userName, @Field("password")  String password);
 
+    @FormUrlEncoded
+    @POST("Salesexcutive/chooseday")
+    Call<JsonObject> chooseDay(@Field("employee_id") String empId);
+
+
+
+
     @GET("Salesexcutive/login")
     Call<JsonObject> loginResponse(@Query("username") String userName, @Query("password")  String password);
 

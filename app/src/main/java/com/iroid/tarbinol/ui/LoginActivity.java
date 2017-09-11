@@ -33,7 +33,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText metPassword;
     private Button mloginButton = null;
 
-    WebService webService;
+    public static String empId;
+
+    public static WebService webService;
+    public static Call<JsonObject> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             metPassword.setError("Enter Password");
         }
 
-        Call<JsonObject> call = webService.login(s1, s2);
+        call = webService.login(s1, s2);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -74,7 +77,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     JsonObject jsonObj = response.body();
                     String status = jsonObj.get("status").getAsString();
                     if(status.equals("success")) {
-                        showToast(LoginActivity.this, "Logged in successfully");
+                        empId = jsonObj.get("employee_id").getAsString();
+                        showToast(LoginActivity.this, "Logged in successfully " + empId);
                         Intent intent = new Intent(LoginActivity.this, ExecutiveNameActivity.class);
                         startActivity(intent);
                     }else{

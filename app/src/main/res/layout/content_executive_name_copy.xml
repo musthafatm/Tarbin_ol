@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/list_grad"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.iroid.tarbinol.ui.ExecutiveNameActivity"
+    android:scrollbars="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/margin_extra_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_marginRight="@dimen/margin_extra_large">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_your_route"
+                android:paddingStart="@dimen/padding_small"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_normal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mondayLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/margin_extra_large"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_extra_large"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tvMonday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/monday"
+                android:paddingStart="@dimen/padding_small"
+                android:textSize="@dimen/font_small"
+                android:textColor="@color/white" />
+
+
+            <TextView
+                android:id="@+id/mondayLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/palarivattom"
+                android:gravity="center|left"
+                android:textSize="@dimen/font_tiny"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:drawableLeft="@drawable/ic_placeholder"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_white_24dp"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:textColor="@color/white" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@color/darkgreen"
+                android:layout_height="0.5dp">
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tuesdayLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/margin_extra_large"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_extra_large"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tvTuesday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tuesday"
+                android:paddingStart="@dimen/padding_small"
+                android:textSize="@dimen/font_small"
+                android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/tuesdayLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/palarivattom"
+                android:gravity="center|left"
+                android:textSize="@dimen/font_tiny"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:drawableLeft="@drawable/ic_placeholder"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_white_24dp"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:textColor="@color/white" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@color/darkgreen"
+                android:layout_height="0.5dp">
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/wednesdayLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/margin_extra_large"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_extra_large"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tvWednesday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wednsday"
+                android:paddingStart="@dimen/padding_small"
+                android:textSize="@dimen/font_small"
+                android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/wednesdayLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/palarivattom"
+                android:gravity="center|left"
+                android:textSize="@dimen/font_tiny"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:drawableLeft="@drawable/ic_placeholder"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_white_24dp"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:textColor="@color/white" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@color/darkgreen"
+                android:layout_height="0.5dp">
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:id="@+id/thursdayLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/margin_extra_large"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_extra_large"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tvThursday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/thursday"
+                android:paddingStart="@dimen/padding_small"
+                android:textSize="@dimen/font_small"
+                android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/thursdayLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/palarivattom"
+                android:gravity="center|left"
+                android:textSize="@dimen/font_tiny"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:drawableLeft="@drawable/ic_placeholder"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_white_24dp"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:textColor="@color/white" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@color/darkgreen"
+                android:layout_height="0.5dp">
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/fridayLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/margin_extra_large"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_extra_large"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tvFriday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/friday"
+                android:paddingStart="@dimen/padding_small"
+                android:textSize="@dimen/font_small"
+                android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/fridayLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/palarivattom"
+                android:gravity="center|left"
+                android:textSize="@dimen/font_tiny"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:drawableLeft="@drawable/ic_placeholder"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_white_24dp"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:textColor="@color/white" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@color/darkgreen"
+                android:layout_height="0.5dp">
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/saturdayLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/margin_extra_large"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_extra_large"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tvSaturday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/saturday"
+                android:paddingStart="@dimen/padding_small"
+                android:textSize="@dimen/font_small"
+                android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/saturdayLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/palarivattom"
+                android:gravity="center|left"
+                android:textSize="@dimen/font_tiny"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:drawableLeft="@drawable/ic_placeholder"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_white_24dp"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:textColor="@color/white" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@color/darkgreen"
+                android:layout_height="0.5dp">
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/otherLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/margin_extra_large"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_extra_large"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tvOther"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/other"
+                android:paddingStart="@dimen/padding_small"
+                android:textSize="@dimen/font_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_white_24dp"
+                android:textColor="@color/white" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@color/darkgreen"
+                android:layout_height="0.5dp">
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>
