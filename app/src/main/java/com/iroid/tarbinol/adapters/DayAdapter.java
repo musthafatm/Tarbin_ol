@@ -1,5 +1,6 @@
 package com.iroid.tarbinol.adapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -76,10 +77,19 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (onItemClickListener!=null) {
-                        onItemClickListener.onItemClicked(dayItemList.get(getAdapterPosition()),getAdapterPosition());
 
-                    }
+                    Context c = v.getContext();
+                    Intent intent = new Intent(c,DashboardActivity.class);
+                    intent.putExtra("DAY", mTvMonday.getText().toString());
+                    intent.putExtra("LOCATION", mMondayLocal.getText().toString());
+                    c.startActivity(intent);
+
+
+//                    if (onItemClickListener!=null) {
+//                        onItemClickListener.onItemClicked(dayItemList.get(getAdapterPosition()),getAdapterPosition());
+//
+//
+//                    }
                 }
             });
 

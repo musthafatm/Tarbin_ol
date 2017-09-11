@@ -1,5 +1,6 @@
 package com.iroid.tarbinol;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -155,6 +156,7 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
 
 //        switch (v.getId()) {
 //            case R.id.mondayLinearLayout:
