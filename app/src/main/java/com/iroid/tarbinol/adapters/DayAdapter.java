@@ -43,14 +43,12 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
     private OnItemClickListener onItemClickListener;
     private Context mContext;
 
-    public static WebService webService;
-    public static Call<JsonObject> call;
 
     String shopname;
     String city;
     String place;
 
-    public DayAdapter(List<DayItem> dayItemList, Context context){
+    public DayAdapter(List<DayItem> dayItemList, Context context) {
         this.dayItemList = dayItemList;
         this.mContext = context;
     }
@@ -73,19 +71,18 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
     }
 
 
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
     public interface OnItemClickListener {
         void onItemClicked(DayItem dayItem, int position);
     }
+
     @Override
     public int getItemCount() {
         return dayItemList.size();
     }
-
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -97,72 +94,15 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
             mTvMonday = (TextView) itemView.findViewById(R.id.tvMonday);
             mMondayLocal = (TextView) itemView.findViewById(R.id.mondayLocal);
 
-            webService = App.getClient().create(WebService.class);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    String day = mTvMonday.getText().toString();
-
-                    call = webService.todayTask(day);
-                    call.enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-                if (response.isSuccessful()) {
-
-                    JsonObject jsonObj = response.body();
-                    String status = jsonObj.get("status").getAsString();
-                    if (status.equals("success")) {
-
-                        JsonArray jsonArray = jsonObj.get("data").getAsJsonArray();
-
-                            for (int i = 0; i < jsonArray.size(); i++) {
-                                JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
-
-                                shopname = jsonObject.get("shopname").getAsString();
-                                city = jsonObject.get("city").getAsString();
-                                place = jsonObject.get("place").getAsString();
-                            }
-
-
-
-
-
-                   Context c = mContext;
-                    Intent intent = new Intent(c,DashboardActivity.class);
-                    intent.putExtra("DAY", mTvMonday.getText().toString());
-                    intent.putExtra("LOCATION", mMondayLocal.getText().toString());
-                    intent.putExtra("City", city);
-                    intent.putExtra("Place", place);
-                    intent.putExtra("ShopName", shopname);
-                    c.startActivity(intent);
-
-                    } else {
-                        String msg = jsonObj.get("message").getAsString();
-                        showToast(mContext, msg);
-                    }
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-//          ON ERROR COMMENT THE BELOW CODES
-//                Response<JsonObject> responses = null;
-//                if (!(responses.isSuccessful())) {             responses.message()
-//                    showToast(v.getContext(), "No_Network_ACCESS");
-//
-//                }
-            }
-        });
-
-
-
 
                     Context c = v.getContext();
-                    Intent intent = new Intent(c,DashboardActivity.class);
+                    Intent intent = new Intent(c, DashboardActivity.class);
                     intent.putExtra("DAY", mTvMonday.getText().toString());
                     intent.putExtra("LOCATION", mMondayLocal.getText().toString());
                     c.startActivity(intent);
@@ -177,8 +117,6 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
 
         }
     }
-
-
 
 
 }

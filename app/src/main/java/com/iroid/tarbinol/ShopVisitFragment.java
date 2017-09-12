@@ -1,12 +1,10 @@
 package com.iroid.tarbinol;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,30 +13,34 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.iroid.tarbinol.adapters.ShopVisitRecyclerAdapter;
-import com.iroid.tarbinol.dummy.DummyContent;
-import com.iroid.tarbinol.dummy.DummyContent.DummyItem;
-import com.iroid.tarbinol.model.ShopVisitModel;
+import com.iroid.tarbinol.api.WebService;
+import com.iroid.tarbinol.app_prefs.AppPreferences;
+import com.iroid.tarbinol.model.ShopDetails;
+import com.iroid.tarbinol.model.ShopVisitResponseModel;
 import com.iroid.tarbinol.ui.CheckinActivity;
-import com.iroid.tarbinol.ui.DashboardActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ShopVisitFragment extends Fragment {
 
     private static final int REQUEST_RESULT = 3232;
-    private List<ShopVisitModel> shopVisitModelList = new ArrayList<>();
+    private List<ShopDetails> shopVisitModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ShopVisitRecyclerAdapter mAdapter;
-    int i;
+
     private String fragCity;
     private String fragPlace;
     private String fragShopName;
     String[] shopName = {"Kerala Hardware Shop", "Jyothi Paint Shop", "Johnson Hardware Shop", "Indira Hardwares", "Matha Paint and Hardwares", "Peevees Hardwares", "Kareems Hardwares", "Mahatma Hardwares", "Aleena Hardwares and Paints"};
 
-    String[] shopLocation = {"Palarivattom,cochin", "Thammanam,cochin", "Thammanam South,cochin", "Padivattom,cochin", "Vyttila,cochin", "Punnurunni,cochin","Kuthappady,cochin","Naroth Road,cochin","Bavarapparambu,cochin"};
+    String[] shopLocation = {"Palarivattom,cochin", "Thammanam,cochin", "Thammanam South,cochin", "Padivattom,cochin", "Vyttila,cochin", "Punnurunni,cochin", "Kuthappady,cochin", "Naroth Road,cochin", "Bavarapparambu,cochin"};
 
-    public ShopVisitFragment(){
+    public ShopVisitFragment() {
         // Required empty public constructor
     }
 
@@ -50,30 +52,31 @@ public class ShopVisitFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_shop_visit, container, false);
 
 
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
+        Bundle arguments = getArguments();
+        String day = arguments.getString("DAY");
 
-        for (i=0;i<9;i++) {
-            shopVisitModelList.add(new ShopVisitModel(shopName[i], shopLocation[i]));
+        callApi(day);
 
-        }
+
 
         mAdapter = new ShopVisitRecyclerAdapter(shopVisitModelList);
         mAdapter.setOnItemClickListener(new ShopVisitRecyclerAdapter.OnItemClickListener() {
-    @Override
-    public void onItemClicked(ShopVisitModel visitModel,int position) {
-        Toast.makeText(getActivity(), visitModel.getDashBoardShopName(), Toast.LENGTH_SHORT).show();
+            @Override
+            public void onItemClicked(ShopDetails visitModel, int position) {
+                Toast.makeText(getActivity(), visitModel.getShopname(), Toast.LENGTH_SHORT).show();
 
-        Intent checkInIntent = new Intent(getActivity(), CheckinActivity.class);
-        checkInIntent.putExtra("shop",visitModel.getDashBoardShopName());
-        checkInIntent.putExtra("list_id",position);
-        startActivityForResult(checkInIntent, REQUEST_RESULT);
-    }
-});
+                Intent checkInIntent = new Intent(getActivity(), CheckinActivity.class);
+                checkInIntent.putExtra("shop", visitModel.getShopname());
+                checkInIntent.putExtra("list_id", position);
+                startActivityForResult(checkInIntent, REQUEST_RESULT);
+            }
+        });
         RecyclerView.LayoutManager mlayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(mlayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -82,11 +85,41 @@ public class ShopVisitFragment extends Fragment {
 
     }
 
+    private void callApi(String day) {
+
+        WebService webService = App.getClient().create(WebService.class);
+
+        Call<ShopVisitResponseModel> call = webService.todayTask(AppPreferences.getStringData(getActivity(), AppPreferences.EMP_ID), day);
+
+        call.enqueue(new Callback<ShopVisitResponseModel>() {
+            @Override
+            public void onResponse(Call<ShopVisitResponseModel> call, Response<ShopVisitResponseModel> response) {
+
+                if (response.body().getStatus().equalsIgnoreCase("success")) {
+
+                    shopVisitModelList.addAll(response.body().getData());
+                    mAdapter.notifyDataSetChanged();
+
+
+                } else {
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ShopVisitResponseModel> call, Throwable t) {
+
+            }
+        });
+
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==REQUEST_RESULT) {
+        if (requestCode == REQUEST_RESULT) {
             switch (resultCode) {
                 case AppCompatActivity.RESULT_OK:
 
@@ -94,10 +127,10 @@ public class ShopVisitFragment extends Fragment {
                     int list_id = extras.getInt("list_id");
 
 
-                        ShopVisitModel shopVisitModel = shopVisitModelList.get(list_id);
+//                    ShopVisitModel shopVisitModel = shopVisitModelList.get(list_id);
 
-                        shopVisitModel.setPlaced(true);
-                        mAdapter.notifyDataSetChanged();
+//                    shopVisitModel.setPlaced(true);
+                    mAdapter.notifyDataSetChanged();
 
 
                     break;

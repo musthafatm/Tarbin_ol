@@ -19,6 +19,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.iroid.tarbinol.adapters.DayAdapter;
+import com.iroid.tarbinol.app_prefs.AppPreferences;
 import com.iroid.tarbinol.model.DayItem;
 import com.iroid.tarbinol.ui.DashboardActivity;
 
@@ -52,7 +53,7 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
         rvDay.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        call = webService.chooseDay(empId);
+        call = webService.chooseDay(AppPreferences.getStringData(getActivity(), AppPreferences.EMP_ID));
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

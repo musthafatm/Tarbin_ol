@@ -17,6 +17,7 @@ import com.google.gson.JsonObject;
 import com.iroid.tarbinol.App;
 import com.iroid.tarbinol.R;
 import com.iroid.tarbinol.api.WebService;
+import com.iroid.tarbinol.app_prefs.AppPreferences;
 import com.iroid.tarbinol.utils.CommonUtils;
 
 import retrofit2.Call;
@@ -80,6 +81,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         empId = jsonObj.get("employee_id").getAsString();
                         showToast(LoginActivity.this, "Logged in successfully " + empId);
                         Intent intent = new Intent(LoginActivity.this, ExecutiveNameActivity.class);
+                        AppPreferences.insertStringData(LoginActivity.this, AppPreferences.EMP_ID,empId);
                         startActivity(intent);
                     }else{
                         String msg = jsonObj.get("message").getAsString();

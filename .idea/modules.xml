@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Tarbin_ol.iml" filepath="$PROJECT_DIR$/Tarbin_ol.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tarbinol.iml" filepath="$PROJECT_DIR$/Tarbinol.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

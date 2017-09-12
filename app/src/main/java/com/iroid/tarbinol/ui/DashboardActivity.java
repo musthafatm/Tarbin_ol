@@ -75,8 +75,18 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ShopVisitFragment(), "Shop Visit");
-        adapter.addFragment(new PendingTaskFragment(),"Pending Task");
+
+        ShopVisitFragment shopVisitFragment = new ShopVisitFragment();
+
+        shopVisitFragment.setArguments(getIntent().getExtras());
+
+
+        PendingTaskFragment pendingTaskFragment = new PendingTaskFragment();
+        pendingTaskFragment.setArguments(getIntent().getExtras());
+
+
+        adapter.addFragment(shopVisitFragment, "Shop Visit");
+        adapter.addFragment(pendingTaskFragment,"Pending Task");
         viewPager.setAdapter(adapter);
     }
 

@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.iroid.tarbinol.R;
-import com.iroid.tarbinol.model.ShopVisitModel;
+import com.iroid.tarbinol.model.ShopDetails;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,10 +20,10 @@ import java.util.List;
 
 public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecyclerAdapter.MyViewHolder> {
 
-    private List<ShopVisitModel> shopVisitModelList;
+    private List<ShopDetails> shopVisitModelList;
     private OnItemClickListener onItemClickListener;
 
-    public ShopVisitRecyclerAdapter(List<ShopVisitModel> shopVisitModelList){this.shopVisitModelList = shopVisitModelList;}
+    public ShopVisitRecyclerAdapter(List<ShopDetails> shopVisitModelList){this.shopVisitModelList = shopVisitModelList;}
 
 
     @Override
@@ -37,9 +37,9 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        ShopVisitModel shopVisitModel = shopVisitModelList.get(position);
-        holder.dashBoardShopName.setText(shopVisitModel.getDashBoardShopName());
-        holder.dashBoardLocation.setText(shopVisitModel.getDashBoardLocation());
+        ShopDetails shopVisitModel = shopVisitModelList.get(position);
+        holder.dashBoardShopName.setText(shopVisitModel.getShopname());
+        holder.dashBoardLocation.setText(shopVisitModel.getPlace() + ", "+ shopVisitModel.getCity());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh-mm a");
@@ -50,11 +50,11 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
         holder.tvTick_Date.setText(currentDate);
         holder.tvTick_Time.setText(currentTime);
 
-        if (shopVisitModel.isPlaced()) {
-            holder.mLinearLayout.setVisibility(View.VISIBLE);
-        }else {
-            holder.mLinearLayout.setVisibility(View.INVISIBLE);
-        }
+//        if (shopVisitModel.isPlaced()) {
+//            holder.mLinearLayout.setVisibility(View.VISIBLE);
+//        }else {
+//            holder.mLinearLayout.setVisibility(View.INVISIBLE);
+//        }
 
     }
 
@@ -65,7 +65,7 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
     }
 
     public interface OnItemClickListener {
-        void onItemClicked(ShopVisitModel visitModel,int position);
+        void onItemClicked(ShopDetails visitModel, int position);
     }
     @Override
     public int getItemCount() {

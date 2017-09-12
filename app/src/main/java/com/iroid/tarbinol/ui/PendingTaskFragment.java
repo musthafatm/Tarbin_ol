@@ -1,8 +1,6 @@
 package com.iroid.tarbinol.ui;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +14,7 @@ import android.widget.Toast;
 
 import com.iroid.tarbinol.R;
 import com.iroid.tarbinol.adapters.ShopVisitRecyclerAdapter;
-import com.iroid.tarbinol.model.ShopVisitModel;
+import com.iroid.tarbinol.model.ShopDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,7 @@ public class PendingTaskFragment extends Fragment {
     //HERE CODE 
 
     private static final int REQUEST_RESULT = 3232;
-    private List<ShopVisitModel> shopVisitModelList = new ArrayList<>();
+    private List<ShopDetails> shopVisitModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ShopVisitRecyclerAdapter mAdapter;
     int i;
@@ -52,19 +50,16 @@ public class PendingTaskFragment extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
 
-        for (i=0;i<9;i++) {
-            shopVisitModelList.add(new ShopVisitModel(shopName[i], shopLocation[i]));
 
-        }
 
         mAdapter = new ShopVisitRecyclerAdapter(shopVisitModelList);
         mAdapter.setOnItemClickListener(new ShopVisitRecyclerAdapter.OnItemClickListener() {
             @Override
-            public void onItemClicked(ShopVisitModel visitModel,int position) {
-                Toast.makeText(getActivity(), visitModel.getDashBoardShopName(), Toast.LENGTH_SHORT).show();
+            public void onItemClicked(ShopDetails visitModel, int position) {
+                Toast.makeText(getActivity(), visitModel.getShopname(), Toast.LENGTH_SHORT).show();
 
                 Intent checkInIntent = new Intent(getActivity(), CheckinActivity.class);
-                checkInIntent.putExtra("shop",visitModel.getDashBoardShopName());
+                checkInIntent.putExtra("shop",visitModel.getShopname());
                 checkInIntent.putExtra("list_id",position);
                 startActivityForResult(checkInIntent, REQUEST_RESULT);
             }
@@ -88,9 +83,9 @@ public class PendingTaskFragment extends Fragment {
                     int list_id = extras.getInt("list_id");
 
                     if (shopVisitModelList!=null&& shopVisitModelList.size()>0) {
-                        ShopVisitModel shopVisitModel = shopVisitModelList.get(list_id);
+//                        ShopVisitModel shopVisitModel = shopVisitModelList.get(list_id);
 
-                        shopVisitModel.setPlaced(true);
+//                        shopVisitModel.setPlaced(true);
                         mAdapter.notifyDataSetChanged();
                     }
                     break;
