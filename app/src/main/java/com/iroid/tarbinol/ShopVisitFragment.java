@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.iroid.tarbinol.adapters.ShopVisitRecyclerAdapter;
 import com.iroid.tarbinol.api.WebService;
 import com.iroid.tarbinol.app_prefs.AppPreferences;
+import com.iroid.tarbinol.model.CheckInDetails;
+import com.iroid.tarbinol.model.CheckinResponseModel;
 import com.iroid.tarbinol.model.ShopDetails;
 import com.iroid.tarbinol.model.ShopVisitResponseModel;
 import com.iroid.tarbinol.ui.CheckinActivity;
@@ -26,19 +28,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.iroid.tarbinol.utils.CommonUtils.showToast;
+
 public class ShopVisitFragment extends Fragment {
 
     private static final int REQUEST_RESULT = 3232;
     private List<ShopDetails> shopVisitModelList = new ArrayList<>();
+    private List<CheckInDetails> checkInDetailsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ShopVisitRecyclerAdapter mAdapter;
+    private String shop_id;
+    private String desc;
+//    public static int shopId;
 
-    private String fragCity;
+
+   /* private String fragCity;
     private String fragPlace;
     private String fragShopName;
     String[] shopName = {"Kerala Hardware Shop", "Jyothi Paint Shop", "Johnson Hardware Shop", "Indira Hardwares", "Matha Paint and Hardwares", "Peevees Hardwares", "Kareems Hardwares", "Mahatma Hardwares", "Aleena Hardwares and Paints"};
 
     String[] shopLocation = {"Palarivattom,cochin", "Thammanam,cochin", "Thammanam South,cochin", "Padivattom,cochin", "Vyttila,cochin", "Punnurunni,cochin", "Kuthappady,cochin", "Naroth Road,cochin", "Bavarapparambu,cochin"};
+*/
+
+
 
     public ShopVisitFragment() {
         // Required empty public constructor
@@ -62,18 +74,37 @@ public class ShopVisitFragment extends Fragment {
         String day = arguments.getString("DAY");
 
         callApi(day);
-
+        callCheckInApi(shop_id,day);
 
 
         mAdapter = new ShopVisitRecyclerAdapter(shopVisitModelList);
+
+        //****************
+        ShopDetails visitModelLocal = new ShopDetails();
+        shop_id = visitModelLocal.getShopId();
+                //***************
+
+
         mAdapter.setOnItemClickListener(new ShopVisitRecyclerAdapter.OnItemClickListener() {
+
+            //******-----------------**************
             @Override
             public void onItemClicked(ShopDetails visitModel, int position) {
-                Toast.makeText(getActivity(), visitModel.getShopname(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), visitModel.getShopname(), Toast.LENGTH_SHORT).show();
+
+
+                CheckInDetails checkInDetailsModel = checkInDetailsList.get(position);
+                desc =  checkInDetailsModel.getDescription();
+
+
+
+
 
                 Intent checkInIntent = new Intent(getActivity(), CheckinActivity.class);
                 checkInIntent.putExtra("shop", visitModel.getShopname());
                 checkInIntent.putExtra("list_id", position);
+                checkInIntent.putExtra("shop_id", visitModel.getShopId());
+                checkInIntent.putExtra("desc", desc);
                 startActivityForResult(checkInIntent, REQUEST_RESULT);
             }
         });
@@ -82,14 +113,45 @@ public class ShopVisitFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
         return view;
-
     }
+
+
+    //**********************************************************************************
+
+    private void callCheckInApi(String shop_id, String day) {
+        WebService webService = App.getClient().create(WebService.class);
+        Call<CheckinResponseModel> call = webService.check_in_Task(AppPreferences.getStringData(getActivity(),
+                AppPreferences.EMP_ID),day,shop_id);
+        call.enqueue(new Callback<CheckinResponseModel>() {
+            @Override
+            public void onResponse(Call<CheckinResponseModel> call, Response<CheckinResponseModel> response) {
+                if (response.body().getStatus().equalsIgnoreCase("success")) {
+
+                    checkInDetailsList.addAll(response.body().getData());
+
+
+//                    mAdapter.notifyDataSetChanged();
+                } else {
+                    showToast(getActivity(),"Response Failure");
+                }
+            }
+            @Override
+            public void onFailure(Call<CheckinResponseModel> call, Throwable t) {
+                showToast(getActivity(),"NO_NETWORK_ACCESS");
+            }
+        });
+    }
+
+    //*************************************************************************************
+
+
 
     private void callApi(String day) {
 
         WebService webService = App.getClient().create(WebService.class);
 
-        Call<ShopVisitResponseModel> call = webService.todayTask(AppPreferences.getStringData(getActivity(), AppPreferences.EMP_ID), day);
+        Call<ShopVisitResponseModel> call = webService.todayTask(AppPreferences.getStringData(getActivity(),
+                AppPreferences.EMP_ID), day);
 
         call.enqueue(new Callback<ShopVisitResponseModel>() {
             @Override
@@ -98,11 +160,11 @@ public class ShopVisitFragment extends Fragment {
                 if (response.body().getStatus().equalsIgnoreCase("success")) {
 
                     shopVisitModelList.addAll(response.body().getData());
+
                     mAdapter.notifyDataSetChanged();
 
-
                 } else {
-
+                    showToast(getActivity(),"Response Failure");
                 }
 
             }
@@ -110,6 +172,7 @@ public class ShopVisitFragment extends Fragment {
             @Override
             public void onFailure(Call<ShopVisitResponseModel> call, Throwable t) {
 
+               showToast(getActivity(),"NO_NETWORK_ACCESS");
             }
         });
 
@@ -127,9 +190,17 @@ public class ShopVisitFragment extends Fragment {
                     int list_id = extras.getInt("list_id");
 
 
-//                    ShopVisitModel shopVisitModel = shopVisitModelList.get(list_id);
+                    ShopDetails shopVisitModel = shopVisitModelList.get(list_id);
 
-//                    shopVisitModel.setPlaced(true);
+                    String hider = shopVisitModel.getStatus();
+
+                    showToast(getActivity(), hider);
+
+//                    if (hider == "1") {
+//                    }
+
+                    shopVisitModel.setPlaced(true);
+
                     mAdapter.notifyDataSetChanged();
 
 
@@ -137,6 +208,12 @@ public class ShopVisitFragment extends Fragment {
             }
         }
     }
+
+
+
+
+
+
 
     /* // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";

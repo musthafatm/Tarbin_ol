@@ -1,6 +1,7 @@
 package com.iroid.tarbinol.api;
 
 import com.google.gson.JsonObject;
+import com.iroid.tarbinol.model.CheckinResponseModel;
 import com.iroid.tarbinol.model.ShopVisitResponseModel;
 
 import retrofit2.Call;
@@ -28,6 +29,10 @@ public interface WebService {
     @FormUrlEncoded
     @POST("Salesexcutive/TodayTask")
     Call<ShopVisitResponseModel> todayTask(@Field("employee_id") String empId, @Field("day") String day);
+
+    @FormUrlEncoded
+    @POST("Salesexcutive/salesexecutiveCheckin")
+    Call<CheckinResponseModel> check_in_Task(@Field("employee_id") String empId, @Field("day") String day, @Field("day") String shopId);
 
 
 

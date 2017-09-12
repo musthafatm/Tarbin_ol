@@ -1,6 +1,5 @@
-package com.iroid.tarbinol.app_prefs;/**
- * Created by Muhammed on 12/09/17.
- */
+package com.iroid.tarbinol.app_prefs;
+
 
 import android.content.Context;
 import android.content.SharedPreferences;

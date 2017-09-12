@@ -73,11 +73,12 @@ public class DashboardActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         ShopVisitFragment shopVisitFragment = new ShopVisitFragment();
-
         shopVisitFragment.setArguments(getIntent().getExtras());
 
 

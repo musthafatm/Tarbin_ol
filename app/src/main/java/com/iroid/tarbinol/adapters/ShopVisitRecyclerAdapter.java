@@ -39,7 +39,7 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
 
         ShopDetails shopVisitModel = shopVisitModelList.get(position);
         holder.dashBoardShopName.setText(shopVisitModel.getShopname());
-        holder.dashBoardLocation.setText(shopVisitModel.getPlace() + ", "+ shopVisitModel.getCity());
+        holder.dashBoardLocation.setText( shopVisitModel.getCity() + ", "+ shopVisitModel.getPlace());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh-mm a");
@@ -50,11 +50,11 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
         holder.tvTick_Date.setText(currentDate);
         holder.tvTick_Time.setText(currentTime);
 
-//        if (shopVisitModel.isPlaced()) {
-//            holder.mLinearLayout.setVisibility(View.VISIBLE);
-//        }else {
-//            holder.mLinearLayout.setVisibility(View.INVISIBLE);
-//        }
+        if (shopVisitModel.isPlaced()) {
+            holder.mLinearLayout.setVisibility(View.VISIBLE);
+        }else {
+            holder.mLinearLayout.setVisibility(View.INVISIBLE);
+        }
 
     }
 

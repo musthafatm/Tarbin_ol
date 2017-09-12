@@ -27,7 +27,7 @@ public class PendingTaskFragment extends Fragment {
     private List<ShopDetails> shopVisitModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ShopVisitRecyclerAdapter mAdapter;
-    int i;
+
     String[] shopName = {"Kerala Hardware Shop", "Jyothi Paint Shop", "Johnson Hardware Shop", "Indira Hardwares", "Matha Paint and Hardwares", "Peevees Hardwares", "Kareems Hardwares", "Mahatma Hardwares", "Aleena Hardwares and Paints"};
 
     String[] shopLocation = {"Palarivattom,cochin", "Thammanam,cochin", "Thammanam South,cochin", "Padivattom,cochin", "Vyttila,cochin", "Punnurunni,cochin","Kuthappady,cochin","Naroth Road,cochin","Bavarapparambu,cochin"};

@@ -10,8 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iroid.tarbinol.R;
+import com.iroid.tarbinol.ShopVisitFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,6 +31,8 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
     private Toolbar mToolbar;
 
     public String shop;
+    public String shopId;
+    public String description;
 
 
     @Override
@@ -57,6 +61,13 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
 
         Bundle extras = getIntent().getExtras();
          shop = extras.getString("shop");
+        shopId = extras.getString("shop_id");
+        description = extras.getString("desc");
+        Toast.makeText(this,description,Toast.LENGTH_LONG).show();
+
+
+        //******************
+
         mtvCheckInShopName.setText(shop);
         mtvCheckInDate.setText(currentDate);
         mtvCheckInTime.setText(currentTime);
@@ -91,7 +102,6 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
 
         checkInIntent.putExtra("list_id", list_id);
         checkInIntent.putExtra("shop_name_title",mtvCheckInShopName.getText().toString());
-        //************************
 
         startActivityForResult(checkInIntent, REQUEST_CANCEL);
 

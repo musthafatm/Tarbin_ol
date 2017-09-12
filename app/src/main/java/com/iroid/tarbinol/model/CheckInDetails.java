@@ -4,10 +4,7 @@ package com.iroid.tarbinol.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ShopDetails {
-
-    private boolean isPlaced;
-
+public class CheckInDetails {
 
     @SerializedName("name")
     @Expose
@@ -21,12 +18,9 @@ public class ShopDetails {
     @SerializedName("place")
     @Expose
     private String place;
-    @SerializedName("checkingdate")
+    @SerializedName("description")
     @Expose
-    private String checkingdate;
-    @SerializedName("checkingtime")
-    @Expose
-    private String checkingtime;
+    private String description;
     @SerializedName("shop_id")
     @Expose
     private String shopId;
@@ -39,9 +33,6 @@ public class ShopDetails {
     @SerializedName("location_id")
     @Expose
     private String locationId;
-    @SerializedName("category_id")
-    @Expose
-    private String categoryId;
     @SerializedName("status")
     @Expose
     private String status;
@@ -78,20 +69,12 @@ public class ShopDetails {
         this.place = place;
     }
 
-    public String getCheckingdate() {
-        return checkingdate;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCheckingdate(String checkingdate) {
-        this.checkingdate = checkingdate;
-    }
-
-    public String getCheckingtime() {
-        return checkingtime;
-    }
-
-    public void setCheckingtime(String checkingtime) {
-        this.checkingtime = checkingtime;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getShopId() {
@@ -126,31 +109,12 @@ public class ShopDetails {
         this.locationId = locationId;
     }
 
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-
-
-
-    public boolean isPlaced() {
-        return isPlaced;
-    }
-
-    public void setPlaced(boolean placed) {
-        isPlaced = placed;
     }
 
 }
