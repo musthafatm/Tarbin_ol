@@ -24,6 +24,11 @@ public interface WebService {
     Call<JsonObject> chooseDay(@Field("employee_id") String empId);
 
 
+    @FormUrlEncoded
+    @POST("Salesexcutive/TodayTask")
+    Call<JsonObject> todayTask(@Field("days") String day);
+
+
 
 
     @GET("Salesexcutive/login")

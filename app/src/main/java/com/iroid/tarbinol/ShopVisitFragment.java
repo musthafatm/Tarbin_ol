@@ -19,6 +19,7 @@ import com.iroid.tarbinol.dummy.DummyContent;
 import com.iroid.tarbinol.dummy.DummyContent.DummyItem;
 import com.iroid.tarbinol.model.ShopVisitModel;
 import com.iroid.tarbinol.ui.CheckinActivity;
+import com.iroid.tarbinol.ui.DashboardActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +31,17 @@ public class ShopVisitFragment extends Fragment {
     private RecyclerView recyclerView;
     private ShopVisitRecyclerAdapter mAdapter;
     int i;
+    private String fragCity;
+    private String fragPlace;
+    private String fragShopName;
     String[] shopName = {"Kerala Hardware Shop", "Jyothi Paint Shop", "Johnson Hardware Shop", "Indira Hardwares", "Matha Paint and Hardwares", "Peevees Hardwares", "Kareems Hardwares", "Mahatma Hardwares", "Aleena Hardwares and Paints"};
 
     String[] shopLocation = {"Palarivattom,cochin", "Thammanam,cochin", "Thammanam South,cochin", "Padivattom,cochin", "Vyttila,cochin", "Punnurunni,cochin","Kuthappady,cochin","Naroth Road,cochin","Bavarapparambu,cochin"};
 
-    public ShopVisitFragment() {
+    public ShopVisitFragment(){
         // Required empty public constructor
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -30,4 +30,5 @@ public class DayItem {
     public void setLocation(String location) {
         this.location = location;
     }
+
 }

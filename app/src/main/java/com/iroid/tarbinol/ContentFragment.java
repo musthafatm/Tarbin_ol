@@ -40,8 +40,6 @@ import static com.iroid.tarbinol.utils.CommonUtils.showToast;
  */
 
 public class ContentFragment extends Fragment implements View.OnClickListener{
-//    public TextView mtvMonday,mtvTuesday,mtvWednesday,mtvThursday,mtvFriday,mtvSaturday;
-//    public TextView mMondayLocal,mTuesdayLocal,mWednesdayLocal,mThursdayLocal,mFridayLocal,mSaturdayLocal;
 
     RecyclerView rvDay;
 
@@ -52,21 +50,6 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
 
         rvDay = (RecyclerView) view.findViewById(R.id.rvDay);
         rvDay.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-//        mtvMonday = (TextView) view.findViewById(R.id.tvMonday);
-//        mtvTuesday = (TextView) view.findViewById(R.id.tvTuesday);
-//        mtvWednesday = (TextView) view.findViewById(R.id.tvWednesday);
-//        mtvThursday = (TextView) view.findViewById(R.id.tvThursday);
-//        mtvFriday = (TextView) view.findViewById(R.id.tvFriday);
-//        mtvSaturday = (TextView) view.findViewById(R.id.tvSaturday);
-//
-//        mMondayLocal = (TextView) view.findViewById(R.id.mondayLocal);
-//        mTuesdayLocal = (TextView) view.findViewById(R.id.tuesdayLocal);
-//        mWednesdayLocal = (TextView) view.findViewById(R.id.wednesdayLocal);
-//        mThursdayLocal = (TextView) view.findViewById(R.id.thursdayLocal);
-//        mFridayLocal = (TextView) view.findViewById(R.id.fridayLocal);
-//        mSaturdayLocal = (TextView) view.findViewById(R.id.saturdayLocal);
-
 
 
         call = webService.chooseDay(empId);
@@ -87,11 +70,7 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
 //                           JsonObject jsonObject = jsonArray.getAsJsonObject();
                            JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
 
-
-
 //                           dayItems.add(new DayItem(jsonObject.get("days").getAsString(), jsonObject.get("location").getAsString()));
-
-
 
 //                           Gson gson = new Gson();
 //                           Type type = new TypeToken<List<DayItem>>() {}.getType();
@@ -102,13 +81,14 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
 //                               System.out.println(day_Item);
 //                           }
 
-                           dayItems.add(new DayItem(jsonObject.get("days").getAsString(), jsonObject.get("location").getAsString()));
+                           dayItems.add(new DayItem(jsonObject.get("days").getAsString(),
+                                   jsonObject.get("location").getAsString()));
 
 
                        }
 
 
-                        DayAdapter dayAdapter = new DayAdapter(dayItems);
+                        DayAdapter dayAdapter = new DayAdapter(dayItems, getActivity());
                         rvDay.setAdapter(dayAdapter);
 
 
@@ -129,27 +109,6 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
         });
 
 
-
-
-
-
-
-//
-//        LinearLayout mLinearLayout1 = (LinearLayout) view.findViewById(R.id.mondayLinearLayout);
-//        LinearLayout mLinearLayout2 = (LinearLayout) view.findViewById(R.id.tuesdayLinearLayout);
-//        LinearLayout mLinearLayout3 = (LinearLayout) view.findViewById(R.id.wednesdayLinearLayout);
-//        LinearLayout mLinearLayout4 = (LinearLayout) view.findViewById(R.id.thursdayLinearLayout);
-//        LinearLayout mLinearLayout5 = (LinearLayout) view.findViewById(R.id.fridayLinearLayout);
-//        LinearLayout mLinearLayout6 = (LinearLayout) view.findViewById(R.id.saturdayLinearLayout);
-//        LinearLayout mLinearLayout7 = (LinearLayout) view.findViewById(R.id.otherLinearLayout);
-//
-//        mLinearLayout1.setOnClickListener(this);
-//        mLinearLayout2.setOnClickListener(this);
-//        mLinearLayout3.setOnClickListener(this);
-//        mLinearLayout4.setOnClickListener(this);
-//        mLinearLayout5.setOnClickListener(this);
-//        mLinearLayout6.setOnClickListener(this);
-//        mLinearLayout7.setOnClickListener(this);
 
         return view;
     }
