@@ -52,6 +52,7 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
         holder.tvTick_Date.setText(currentDate);
         holder.tvTick_Time.setText(currentTime);
 
+        //****************/////////////////***************
         if (shopVisitModel.getStatus().equalsIgnoreCase("1")) {
             holder.mLinearLayout.setVisibility(View.VISIBLE);
         } else {

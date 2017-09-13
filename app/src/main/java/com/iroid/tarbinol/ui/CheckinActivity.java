@@ -34,7 +34,6 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
     private static final int REQUEST_CANCEL = 121;
     private TextView mtvCheckInShopName;
     private TextView mtvCheckInShopDescription;
-    //    private Button mcheckinButton = null;
     private TextView mtvCheckInDate;
     private TextView mtvCheckInTime;
     private RelativeLayout mcheckInRelative;
@@ -75,13 +74,9 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
         shopId = extras.getString("shop_id");
         days = extras.getString("days");
         description = extras.getString("description");
-//        description = extras.getString("desc");
-
-
 
         mtvCheckInShopName.setText(shop);
         mtvCheckInShopDescription.setText(description);
-
         mtvCheckInDate.setText(currentDate);
         mtvCheckInTime.setText(currentTime);
 
@@ -112,6 +107,7 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
 
         checkInIntent.putExtra("list_id", list_id);
         checkInIntent.putExtra("shop_name_title", mtvCheckInShopName.getText().toString());
+        checkInIntent.putExtra("shop_id", shopId);
 
         startActivityForResult(checkInIntent, REQUEST_CANCEL);
 

@@ -43,7 +43,7 @@ public interface WebService {
     Call<JsonObject> editProduct(@Field("shop_id") String shopId,@Field("employee_id") String empId, @Field("product_id") String productId, @Field("required") String required, @Field("in_stock") String inStock);
 
     @FormUrlEncoded
-    @POST("Salesexcutive/salesexecutiveCheckin")
+    @POST("Salesexcutive/checkinTimeUpDate")
     Call<JsonObject> checkin_TimeUpdate(@Field("employee_id") String empId, @Field("shop_id") String shopId, @Field("latitude") String latitude, @Field("longitude") String longitude);
 
     @GET("Salesexcutive/login")

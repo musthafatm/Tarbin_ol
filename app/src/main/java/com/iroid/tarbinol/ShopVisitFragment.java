@@ -38,32 +38,20 @@ public class ShopVisitFragment extends Fragment {
     private List<CheckInDetails> checkInDetailsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ShopVisitRecyclerAdapter mAdapter;
-    public String shop_id;
-    private String desc;
-//    public static int shopId;
-
-   /* private String fragCity;
-    private String fragPlace;
-    private String fragShopName;
+   /*
     String[] shopName = {"Kerala Hardware Shop", "Jyothi Paint Shop", "Johnson Hardware Shop", "Indira Hardwares", "Matha Paint and Hardwares", "Peevees Hardwares", "Kareems Hardwares", "Mahatma Hardwares", "Aleena Hardwares and Paints"};
     String[] shopLocation = {"Palarivattom,cochin", "Thammanam,cochin", "Thammanam South,cochin", "Padivattom,cochin", "Vyttila,cochin", "Punnurunni,cochin", "Kuthappady,cochin", "Naroth Road,cochin", "Bavarapparambu,cochin"};
 */
-
-
     public ShopVisitFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shop_visit, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
         Bundle arguments = getArguments();
@@ -72,17 +60,8 @@ public class ShopVisitFragment extends Fragment {
         callApi(day);
 //        callCheckInApi(day);
 
-
         mAdapter = new ShopVisitRecyclerAdapter(shopVisitModelList);
-
-        //****************
-//        ShopDetails visitModelLocal = new ShopDetails();
-//        shop_id = visitModelLocal.getShopId();
-        //***************
-
-
         mAdapter.setOnItemClickListener(new ShopVisitRecyclerAdapter.OnItemClickListener() {
-
             //******-----------------**************
             @Override
             public void onItemClicked(ShopDetails visitModel, int position) {
@@ -92,10 +71,10 @@ public class ShopVisitFragment extends Fragment {
 //                CheckInDetails checkInDetailsModel = checkInDetailsList.get(position);
 //                desc =  checkInDetailsModel.getDescription();
 
-
                 callCheckInApi(visitModel, position);
             }
         });
+
         RecyclerView.LayoutManager mlayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(mlayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -120,14 +99,12 @@ public class ShopVisitFragment extends Fragment {
                     if (response.body().getStatus().equalsIgnoreCase("success")) {
                         String description = response.body().getData().get(0).getDescription();
 
-
                         Intent checkInIntent = new Intent(getActivity(), CheckinActivity.class);
                         checkInIntent.putExtra("shop", visitModel.getShopname());
                         checkInIntent.putExtra("days", visitModel.getDays());
                         checkInIntent.putExtra("list_id", position);
                         checkInIntent.putExtra("shop_id", visitModel.getShopId());
                         checkInIntent.putExtra("description", description);
-//                checkInIntent.putExtra("desc", desc);
 
                         startActivityForResult(checkInIntent, REQUEST_RESULT);
                     }

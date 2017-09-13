@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.iroid.tarbinol.R;
+import com.iroid.tarbinol.model.ProductDetails;
 import com.iroid.tarbinol.model.StockTakingModel;
 
 import java.util.List;
@@ -18,10 +19,10 @@ import java.util.List;
 
 public class StockTakingRecyclerAdapter extends RecyclerView.Adapter<StockTakingRecyclerAdapter.MySecondViewHolder>{
 
-    private List<StockTakingModel> stockTakingModelList;
+    private List<ProductDetails> productDetailsModelList;
 
-    public StockTakingRecyclerAdapter(List<StockTakingModel> stockTakingModelList){
-        this.stockTakingModelList = stockTakingModelList;
+    public StockTakingRecyclerAdapter(List<ProductDetails> productDetailsModelList){
+        this.productDetailsModelList = productDetailsModelList;
     }
 
 
@@ -35,21 +36,21 @@ public class StockTakingRecyclerAdapter extends RecyclerView.Adapter<StockTaking
     @Override
     public void onBindViewHolder(MySecondViewHolder holder, int position) {
 
-        StockTakingModel stockTakingModel = stockTakingModelList.get(position);
-        holder.tvStockPaintName.setText(stockTakingModel.getTvStockPaintName());
-        holder.tvPaintDescriptionRed.setText(stockTakingModel.getTvPaintDescriptionRed());
-        holder.tvLitre.setText(stockTakingModel.getTvLitre());
+        ProductDetails productDetailModel = productDetailsModelList.get(position);
+        holder.tvStockPaintName.setText(productDetailModel.getPaintbrand());
+        holder.tvPaintDescriptionRed.setText(productDetailModel.getProductname());
+        holder.tvLitre.setText(productDetailModel.getPaintquantity()+""+ productDetailModel.getPaintunit());
 
 
-        holder.et_required_paint.setText(stockTakingModel.getEt_required_paint());
+        holder.et_required_paint.setText("0");
 //        holder.et_required_paint.setShadowLayer(15,7,3,R.color.text_very_dark);
-        holder.et_paint_inStock.setText(stockTakingModel.getEt_paint_inStock());
+        holder.et_paint_inStock.setText("0");
 
     }
 
     @Override
     public int getItemCount() {
-        return stockTakingModelList.size();
+        return productDetailsModelList.size();
     }
 
 
