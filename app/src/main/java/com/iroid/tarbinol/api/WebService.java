@@ -34,6 +34,11 @@ public interface WebService {
     @POST("Salesexcutive/salesexecutiveCheckin")
     Call<CheckinResponseModel> check_in_Task(@Field("employee_id") String empId, @Field("day") String day, @Field("shop_id") String shopId);
 
+
+    @FormUrlEncoded
+    @POST("Salesexcutive/checkinTimeUpDate")
+    Call<JsonObject> checkin_TimeUpdate(@Field("employee_id") String empId, @Field("shop_id") String shopId, @Field("latitude") double latitude, @Field("longitude") double longitude);
+
     @FormUrlEncoded
     @POST("Salesexcutive/productDisplay")
     Call<ProductDisplayResponseModel> productDisplay(@Field("shop_id") String shopId);
@@ -42,9 +47,6 @@ public interface WebService {
     @POST("Salesexcutive/editProductDetails")
     Call<JsonObject> editProduct(@Field("shop_id") String shopId,@Field("employee_id") String empId, @Field("product_id") String productId, @Field("required") String required, @Field("in_stock") String inStock);
 
-    @FormUrlEncoded
-    @POST("Salesexcutive/checkinTimeUpDate")
-    Call<JsonObject> checkin_TimeUpdate(@Field("employee_id") String empId, @Field("shop_id") String shopId, @Field("latitude") String latitude, @Field("longitude") String longitude);
 
     @GET("Salesexcutive/login")
     Call<JsonObject> loginResponse(@Query("username") String userName, @Query("password")  String password);

@@ -102,10 +102,8 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-
                 showToast(getActivity(), "No_Network_ACCESS");
             }
-
         });
 
 

@@ -28,9 +28,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.google.gson.reflect.TypeToken.get;
 import static com.iroid.tarbinol.utils.CommonUtils.showToast;
 
 public class StockTakingActivity extends AppCompatActivity implements View.OnClickListener {
+
+
 
     private Toolbar ntoolbar;
 
@@ -138,6 +141,7 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
 
 
         //call editproduct api here
+
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.alert_dialog, null, false);
