@@ -12,11 +12,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.iroid.tarbinol.App;
 import com.iroid.tarbinol.R;
 import com.iroid.tarbinol.ShopVisitFragment;
+import com.iroid.tarbinol.api.WebService;
+import com.iroid.tarbinol.app_prefs.AppPreferences;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.iroid.tarbinol.ui.LoginActivity.webService;
+import static com.iroid.tarbinol.utils.CommonUtils.showToast;
 
 public class CheckinActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -32,7 +43,8 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
 
     public String shop;
     public String shopId;
-    public String description;
+    public String desc;
+    public String days;
 
 
     @Override
@@ -62,23 +74,58 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
         Bundle extras = getIntent().getExtras();
          shop = extras.getString("shop");
         shopId = extras.getString("shop_id");
-        description = extras.getString("desc");
-        Toast.makeText(this,description,Toast.LENGTH_LONG).show();
+        days = extras.getString("days");
+//        description = extras.getString("desc");
+//        Toast.makeText(this,description,Toast.LENGTH_LONG).show();
 
-
-        //******************
 
         mtvCheckInShopName.setText(shop);
         mtvCheckInDate.setText(currentDate);
         mtvCheckInTime.setText(currentTime);
+        //--------------------********************-----------------------
+        webService = App.getClient().create(WebService.class);
+        Call<JsonObject> call = webService.check_in_Task(AppPreferences.getStringData(getApplicationContext(),
+                AppPreferences.EMP_ID),days,shopId);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                if (response.body().getStatus().equalsIgnoreCase("success")) {
+                if (response.isSuccessful()) {
+                    JsonObject jsonObj = response.body();
+                    String status = jsonObj.get("status").getAsString();
+                    if (status.equals("success")) {
 
+                        //****$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+//                        desc = jsonObj.get("description").getAsString();
+                        showToast(getApplicationContext(), desc);
+                        mtvCheckInShopDescription.setText(desc);
+
+
+//                    checkInDetailsList.addAll(response.body().getData());
+//
+//                    CheckInDetails checkInDetailsModel = checkInDetailsList.get(0);
+//                    desc =  checkInDetailsModel.getDescription();
+
+
+//                    mAdapter.notifyDataSetChanged();
+                    } else {
+                        showToast(getApplicationContext(), "Response Failure");
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                showToast(getApplicationContext(),"NO_INTERNET_ACCESS");
+            }
+        });
+
+
+
+
+
+
+//----------------------------***************************---------------------------
         mcheckInRelative.setOnClickListener(this);
-
-
-
-
-
-
     }
 
 // Up-Enabled action given by following code
