@@ -71,6 +71,7 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
 
         morderButton = (Button) findViewById(R.id.orderButton);
         morderButton.setOnClickListener(this);
+
     }
 
     // Up-Enabled action given by following code

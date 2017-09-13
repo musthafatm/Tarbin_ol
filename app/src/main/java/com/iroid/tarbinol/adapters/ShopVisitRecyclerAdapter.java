@@ -23,7 +23,9 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
     private List<ShopDetails> shopVisitModelList;
     private OnItemClickListener onItemClickListener;
 
-    public ShopVisitRecyclerAdapter(List<ShopDetails> shopVisitModelList){this.shopVisitModelList = shopVisitModelList;}
+    public ShopVisitRecyclerAdapter(List<ShopDetails> shopVisitModelList) {
+        this.shopVisitModelList = shopVisitModelList;
+    }
 
 
     @Override
@@ -39,7 +41,7 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
 
         ShopDetails shopVisitModel = shopVisitModelList.get(position);
         holder.dashBoardShopName.setText(shopVisitModel.getShopname());
-        holder.dashBoardLocation.setText( shopVisitModel.getCity() + ", "+ shopVisitModel.getPlace());
+        holder.dashBoardLocation.setText(shopVisitModel.getCity() + ", " + shopVisitModel.getPlace());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh-mm a");
@@ -50,28 +52,27 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
         holder.tvTick_Date.setText(currentDate);
         holder.tvTick_Time.setText(currentTime);
 
-        if (shopVisitModel.isPlaced()) {
+        if (shopVisitModel.getStatus().equalsIgnoreCase("1")) {
             holder.mLinearLayout.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             holder.mLinearLayout.setVisibility(View.INVISIBLE);
         }
 
     }
 
 
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
     public interface OnItemClickListener {
         void onItemClicked(ShopDetails visitModel, int position);
     }
+
     @Override
     public int getItemCount() {
         return shopVisitModelList.size();
     }
-
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -88,13 +89,13 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
             dashBoardLocation = (TextView) itemView.findViewById(R.id.dashBoardLocation);
             tvTick_Date = (TextView) itemView.findViewById(R.id.tvTick_Date);
             tvTick_Time = (TextView) itemView.findViewById(R.id.tvTick_Time);
-            mLinearLayout = (LinearLayout)itemView.findViewById(R.id.temp) ;
+            mLinearLayout = (LinearLayout) itemView.findViewById(R.id.temp);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (onItemClickListener!=null) {
-                        onItemClickListener.onItemClicked(shopVisitModelList.get(getAdapterPosition()),getAdapterPosition());
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onItemClicked(shopVisitModelList.get(getAdapterPosition()), getAdapterPosition());
                     }
                 }
             });

@@ -78,7 +78,7 @@ public class ShopVisitFragment extends Fragment {
         //****************
 //        ShopDetails visitModelLocal = new ShopDetails();
 //        shop_id = visitModelLocal.getShopId();
-                //***************
+        //***************
 
 
         mAdapter.setOnItemClickListener(new ShopVisitRecyclerAdapter.OnItemClickListener() {
@@ -93,16 +93,7 @@ public class ShopVisitFragment extends Fragment {
 //                desc =  checkInDetailsModel.getDescription();
 
 
-
-
-                Intent checkInIntent = new Intent(getActivity(), CheckinActivity.class);
-                checkInIntent.putExtra("shop", visitModel.getShopname());
-                checkInIntent.putExtra("days", visitModel.getDays());
-                checkInIntent.putExtra("list_id", position);
-                checkInIntent.putExtra("shop_id", visitModel.getShopId());
-//                checkInIntent.putExtra("desc", desc);
-
-                startActivityForResult(checkInIntent, REQUEST_RESULT);
+                callCheckInApi(visitModel, position);
             }
         });
         RecyclerView.LayoutManager mlayoutManager = new LinearLayoutManager(view.getContext());
@@ -115,44 +106,43 @@ public class ShopVisitFragment extends Fragment {
 
     //**********************************************************************************
 
-    private void callCheckInApi(String day) {
+    private void callCheckInApi(final ShopDetails visitModel, final int position) {
         WebService webService = App.getClient().create(WebService.class);
-        Call<JsonObject> call = webService.check_in_Task(AppPreferences.getStringData(getActivity(),
-                AppPreferences.EMP_ID),day,shop_id);
-        call.enqueue(new Callback<JsonObject>() {
+        Call<CheckinResponseModel> call = webService.check_in_Task(AppPreferences.getStringData(getActivity(),
+                AppPreferences.EMP_ID), visitModel.getDays(), visitModel.getShopId());
+        call.enqueue(new Callback<CheckinResponseModel>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+            public void onResponse(Call<CheckinResponseModel> call, Response<CheckinResponseModel> response) {
 //                if (response.body().getStatus().equalsIgnoreCase("success")) {
+
+
                 if (response.isSuccessful()) {
-                    JsonObject jsonObj = response.body();
-                    String status = jsonObj.get("status").getAsString();
-                    if (status.equals("success")) {
-
-                    desc = jsonObj.get("description").getAsString();
-                        showToast(getActivity(), desc);
+                    if (response.body().getStatus().equalsIgnoreCase("success")) {
+                        String description = response.body().getData().get(0).getDescription();
 
 
-//                    checkInDetailsList.addAll(response.body().getData());
-//
-//                    CheckInDetails checkInDetailsModel = checkInDetailsList.get(0);
-//                    desc =  checkInDetailsModel.getDescription();
+                        Intent checkInIntent = new Intent(getActivity(), CheckinActivity.class);
+                        checkInIntent.putExtra("shop", visitModel.getShopname());
+                        checkInIntent.putExtra("days", visitModel.getDays());
+                        checkInIntent.putExtra("list_id", position);
+                        checkInIntent.putExtra("shop_id", visitModel.getShopId());
+                        checkInIntent.putExtra("description", description);
+//                checkInIntent.putExtra("desc", desc);
 
-
-//                    mAdapter.notifyDataSetChanged();
-                    } else {
-                        showToast(getActivity(), "Response Failure");
+                        startActivityForResult(checkInIntent, REQUEST_RESULT);
                     }
                 }
+
             }
+
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                showToast(getActivity(),"NO_INTERNET_ACCESS");
+            public void onFailure(Call<CheckinResponseModel> call, Throwable t) {
+                showToast(getActivity(), "NO_INTERNET_ACCESS");
             }
         });
     }
 
     //*************************************************************************************
-
 
 
     private void callApi(String day) {
@@ -173,7 +163,7 @@ public class ShopVisitFragment extends Fragment {
                     mAdapter.notifyDataSetChanged();
 
                 } else {
-                    showToast(getActivity(),"Response Failure");
+                    showToast(getActivity(), "Response Failure");
                 }
 
             }
@@ -181,7 +171,7 @@ public class ShopVisitFragment extends Fragment {
             @Override
             public void onFailure(Call<ShopVisitResponseModel> call, Throwable t) {
 
-               showToast(getActivity(),"NO_NETWORK_ACCESS");
+                showToast(getActivity(), "NO_NETWORK_ACCESS");
             }
         });
 
