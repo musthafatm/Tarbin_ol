@@ -1,6 +1,8 @@
 
 package com.iroid.tarbinol.model;
 
+import android.widget.EditText;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -27,6 +29,34 @@ public class ProductDetails {
     @SerializedName("paintbrand")
     @Expose
     private String paintbrand;
+
+
+
+    //*********************************************************************************
+    @SerializedName("required")
+    @Expose
+    private String required;
+    @SerializedName("instock")
+    @Expose
+    private String instock;
+
+
+    public String getRequired() {
+        return required;
+    }
+    public void setRequired(String required) {
+        this.required = required;
+    }
+
+
+    public String getInstock() {
+        return instock;
+    }
+    public void setInstock(String instock) {
+        this.instock = instock;
+    }
+    //************************************************************************************
+
 
     public String getShopname() {
         return shopname;

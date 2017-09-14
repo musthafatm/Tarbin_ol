@@ -13,10 +13,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.gson.JsonObject;
 import com.iroid.tarbinol.App;
 import com.iroid.tarbinol.R;
 import com.iroid.tarbinol.adapters.StockTakingRecyclerAdapter;
 import com.iroid.tarbinol.api.WebService;
+import com.iroid.tarbinol.app_prefs.AppPreferences;
 import com.iroid.tarbinol.model.ProductDetails;
 import com.iroid.tarbinol.model.ProductDisplayResponseModel;
 import com.iroid.tarbinol.model.StockTakingModel;
@@ -43,7 +45,16 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
 
     private StockTakingRecyclerAdapter stockAdapter;
     private Button morderButton = null;
-//    int i;
+
+    public String shopId;
+    int i;
+    String required;
+    String stock;
+    String prdctId;
+    String dataSuccess;
+    String dataFailure;
+
+    Boolean flag;
 
    /* String[] paint_name = {"Asian paints","Asian paints","Asian paints","Asian paints", "Asian paints","Asian paints","Asian paints","Asian paints","Asian paints"};
     String[] paint_describe = {"apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex"};
@@ -60,7 +71,7 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
         setSupportActionBar(ntoolbar);
         Bundle extras = getIntent().getExtras();
         String shopNameTitle = extras.getString("shop_name_title");
-        String shopId = extras.getString("shop_id");
+        shopId = extras.getString("shop_id");
         getSupportActionBar().setTitle(shopNameTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -68,6 +79,7 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
 
 //        *****************
         callProductApi(shopId);
+
 
       /*  for(i=0; i<9; i++) {
             stockTakingModelList.add(new StockTakingModel(paint_name[i], paint_describe[i], litre_string[i], required_string[i], inStock_string[i]));
@@ -83,9 +95,9 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
         morderButton.setOnClickListener(this);
     }
 
-    private void callProductApi(String shopId) {
+    private void callProductApi(String shop_Id) {
          WebService webService = App.getClient().create(WebService.class);
-        Call<ProductDisplayResponseModel> call = webService.productDisplay(shopId);
+        Call<ProductDisplayResponseModel> call = webService.productDisplay(shop_Id);
         call.enqueue(new Callback<ProductDisplayResponseModel>() {
             @Override
             public void onResponse(Call<ProductDisplayResponseModel> call, Response<ProductDisplayResponseModel> response) {
@@ -96,18 +108,13 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
                         productDetailsList.addAll(response.body().getData());
 
                         stockAdapter.notifyDataSetChanged();
-
-
-
 //                        String description = response.body().getData().get(0).getDescription();
-//
 //                        Intent checkInIntent = new Intent(getActivity(), CheckinActivity.class);
 //                        checkInIntent.putExtra("shop", visitModel.getShopname());
 //                        checkInIntent.putExtra("days", visitModel.getDays());
 //                        checkInIntent.putExtra("list_id", position);
 //                        checkInIntent.putExtra("shop_id", visitModel.getShopId());
 //                        checkInIntent.putExtra("description", description);
-
 //                        startActivityForResult(checkInIntent, REQUEST_RESULT);
                     }else {
                         showToast(getApplicationContext(), "Response Failure");
@@ -139,9 +146,20 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
 
-
         //call editproduct api here
+        for (i=0; i<productDetailsList.size(); i++){
+            required = productDetailsList.get(i).getRequired();
+            stock = productDetailsList.get(i).getInstock();
+            prdctId = productDetailsList.get(i).getId();
 
+            callEditProductApi(shopId,  prdctId, required, stock);
+        }
+
+//        if(flag == true) {
+//            showToast(this, dataFailure);
+//        }else{
+//            showToast(this,dataSuccess);
+//        }
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.alert_dialog, null, false);
@@ -153,11 +171,58 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View v) {
                 alertDialog.dismiss();
 
+                showToast(getApplicationContext(),dataSuccess);
                 setResult(RESULT_OK, getIntent());
                 finish();
             }
         });
        alertDialog.show();
     }
+
+
+
+
+
+    private void callEditProductApi(String id_shop, String id_prdct, String req ,String stck) {
+
+         WebService webService = App.getClient().create(WebService.class);
+        Call<JsonObject> call = webService.editProduct(id_shop, AppPreferences.getStringData(getApplicationContext(),
+                    AppPreferences.EMP_ID), id_prdct, req, stck);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                if (response.isSuccessful()) {
+                    JsonObject json_Obj = response.body();
+                    String editStatus = json_Obj.get("status").getAsString();
+                    if(editStatus.equals("success")) {
+                        dataSuccess = json_Obj.get("data").getAsString();
+
+
+
+                    }else {
+//                        showToast(getApplicationContext(), "Response Failure");
+                        dataFailure = json_Obj.get("data").getAsString();
+//                        if(dataFailure =="Something went wrong"){
+//
+//                            flag = true;
+//                        }
+                    }
+
+                }
+
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                showToast(getApplicationContext(), "NO_INTERNET_ACCESS");
+//                flag = true;
+            }
+        });
+
+
+    }
+
+
+
 
 }

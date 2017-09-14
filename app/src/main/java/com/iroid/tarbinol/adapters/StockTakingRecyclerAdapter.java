@@ -1,17 +1,23 @@
 package com.iroid.tarbinol.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iroid.tarbinol.R;
 import com.iroid.tarbinol.model.ProductDetails;
 import com.iroid.tarbinol.model.StockTakingModel;
+import com.iroid.tarbinol.ui.StockTakingActivity;
 
 import java.util.List;
+
+import static com.iroid.tarbinol.R.id.et_required_paint;
 
 /**
  * Created by Acer on 28-Aug-17.
@@ -20,6 +26,8 @@ import java.util.List;
 public class StockTakingRecyclerAdapter extends RecyclerView.Adapter<StockTakingRecyclerAdapter.MySecondViewHolder>{
 
     private List<ProductDetails> productDetailsModelList;
+//    public static String[] mDataset;
+
 
     public StockTakingRecyclerAdapter(List<ProductDetails> productDetailsModelList){
         this.productDetailsModelList = productDetailsModelList;
@@ -34,17 +42,34 @@ public class StockTakingRecyclerAdapter extends RecyclerView.Adapter<StockTaking
     }
 
     @Override
-    public void onBindViewHolder(MySecondViewHolder holder, int position) {
+    public void onBindViewHolder(MySecondViewHolder holder, final int position) {
 
-        ProductDetails productDetailModel = productDetailsModelList.get(position);
+        final ProductDetails productDetailModel = productDetailsModelList.get(position);
         holder.tvStockPaintName.setText(productDetailModel.getPaintbrand());
         holder.tvPaintDescriptionRed.setText(productDetailModel.getProductname());
-        holder.tvLitre.setText(productDetailModel.getPaintquantity()+""+ productDetailModel.getPaintunit());
+        holder.tvLitre.setText(productDetailModel.getPaintquantity()+" "+ productDetailModel.getPaintunit());
 
 
         holder.et_required_paint.setText("0");
 //        holder.et_required_paint.setShadowLayer(15,7,3,R.color.text_very_dark);
         holder.et_paint_inStock.setText("0");
+//
+//        productDetailModel.setRequired(holder.et_required_paint);
+//        productDetailModel.setInstock(holder.et_paint_inStock);
+
+       holder.et_required_paint.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void afterTextChanged(Editable editable) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                productDetailsModelList.get(position).setRequired(charSequence.toString());
+                productDetailsModelList.get(position).setInstock(charSequence.toString());
+
+//                mDataset[position]=charSequence.toString();
+//                productDetailModel.setRequired(mDataset[position]);
+
+            }
+        });
 
     }
 
@@ -67,6 +92,8 @@ public class StockTakingRecyclerAdapter extends RecyclerView.Adapter<StockTaking
             tvLitre = (TextView) itemView.findViewById(R.id.tvLitre);
             et_required_paint = (EditText) itemView.findViewById(R.id.et_required_paint);
             et_paint_inStock = (EditText) itemView.findViewById(R.id.et_paint_inStock);
+
+
 
         }
     }

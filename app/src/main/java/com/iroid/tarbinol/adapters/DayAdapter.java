@@ -70,7 +70,8 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
         holder.mMondayLocal.setText(dayItem.getLocation());
     }
 
-
+// This method in this Adapter is usually used in its Fragment Class. But here not used because we make use of onClick
+    //here itself.
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }

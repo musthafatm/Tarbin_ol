@@ -176,7 +176,7 @@ public class ShopVisitFragment extends Fragment {
 //                    if (hider == "1") {
 //                    }
 
-                    shopVisitModel.setPlaced(true);
+//                    shopVisitModel.setPlaced(true);
 
                     mAdapter.notifyDataSetChanged();
 
