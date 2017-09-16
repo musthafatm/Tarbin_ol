@@ -160,7 +160,7 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
             callCheckInTimeApi(AppPreferences.getStringData(getApplicationContext(),
                     AppPreferences.EMP_ID), shopId, locationLat, locationLong);
         }else{
-            showToast(getApplicationContext(), "Processing location..");
+            showToast(getApplicationContext(), "Waiting for location..");
         }
 
 

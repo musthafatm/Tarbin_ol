@@ -51,8 +51,8 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
     String required;
     String stock;
     String prdctId;
-    String dataSuccess;
-    String dataFailure;
+    String dataSuccess ="";
+    String dataFailure ="";
 
     Boolean flag;
 
@@ -171,12 +171,15 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View v) {
                 alertDialog.dismiss();
 
-                showToast(getApplicationContext(),dataSuccess);
+                if(dataSuccess.length()> 0) {
+                    showToast(getApplicationContext(), dataSuccess);
+                }
                 //showToast(getApplicationContext(),dataFailure);
                 setResult(RESULT_OK, getIntent());
                 finish();
             }
         });
+        alertDialog.setCanceledOnTouchOutside(false);
        alertDialog.show();
     }
 

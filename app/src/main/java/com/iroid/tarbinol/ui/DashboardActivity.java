@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.gson.JsonObject;
@@ -39,9 +40,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         String day = extras.getString("DAY");
         String location = extras.getString("LOCATION");
-        city = extras.getString("City");
-        place = extras.getString("Place");
-        ShopName = extras.getString("ShopName");
+
+
 
         String dayCamel = toCamelCase(day);
         String locationCamel = toCamelCase(location);

@@ -55,16 +55,22 @@ public class PendingTaskFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        Bundle arguments = getArguments();
+        String day = arguments.getString("DAY");
+
+        callApi(day);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_shop_visit, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
 
-        Bundle arguments = getArguments();
-        String day = arguments.getString("DAY");
-
-        callApi(day);
 
         mAdapter = new ShopVisitRecyclerAdapter(shopVisitModelList,ShopVisitRecyclerAdapter.ITEM_STATE_PENDING);
         mAdapter.setOnItemClickListener(new ShopVisitRecyclerAdapter.OnItemClickListener() {
@@ -133,6 +139,7 @@ public class PendingTaskFragment extends Fragment {
                     emp_name = response.body().getData().get(0).getName();
                     AppPreferences.insertStringData(getActivity(), AppPreferences.EMP_NAME,emp_name);
                     //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                    shopVisitModelList.clear();
                     for (ShopDetails shopDetails : response.body().getData()) {
                         if (shopDetails.getStatus().equalsIgnoreCase("0")) {
                             shopVisitModelList.add(shopDetails);

@@ -96,19 +96,18 @@
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/font_small" />
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/et_required_paint"
-                            android:editable="true"
-                            android:text="00"
-                            android:inputType="none"
-                            android:textAlignment="center"
-                            android:textColor="@color/text_very_dark"
-                            android:textSize="@dimen/font_medium"
-                            android:background="@drawable/rounded_edit_text_stock_taking"/>
+                    <EditText
+                        android:id="@+id/et_required_paint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/textfield_selector"
+                        android:inputType="number"
+                        android:hint="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/text_very_dark"
+                        android:textSize="@dimen/font_medium" />
 
-                    </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -134,12 +133,12 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/et_paint_inStock"
                         android:editable="true"
-                        android:text="00"
-                        android:inputType="none"
+                        android:hint="0"
+                        android:inputType="number"
                         android:textAlignment="center"
                         android:textColor="@color/text_very_dark"
                         android:textSize="@dimen/font_medium"
-                        android:background="@drawable/rounded_edit_text_stock_taking"/>
+                        android:background="@drawable/textfield_selector"/>
 
                 </LinearLayout>
 

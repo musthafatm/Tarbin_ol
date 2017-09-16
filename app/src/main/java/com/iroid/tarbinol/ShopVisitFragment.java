@@ -57,13 +57,20 @@ public class ShopVisitFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Bundle arguments = getArguments();
+        String day = arguments.getString("DAY");
+        callApi(day);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shop_visit, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
-        Bundle arguments = getArguments();
-        String day = arguments.getString("DAY");
 
-        callApi(day);
+
+
 //        callCheckInApi(day);
 
         mAdapter = new ShopVisitRecyclerAdapter(shopVisitModelList, ShopVisitRecyclerAdapter.ITEM_STATE_VISITED);
@@ -143,6 +150,7 @@ public class ShopVisitFragment extends Fragment {
                     //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 //
+                    shopVisitModelList.clear();
                     shopVisitModelList.addAll(response.body().getData());
 
                     mAdapter.notifyDataSetChanged();
@@ -174,20 +182,11 @@ public class ShopVisitFragment extends Fragment {
                     Bundle extras = data.getExtras();
                     int list_id = extras.getInt("list_id");
 
-
-                    ShopDetails shopVisitModel = shopVisitModelList.get(list_id);
-
-
-                    String hider = shopVisitModel.getStatus();
-
-                    showToast(getActivity(), hider);
-
-//                    if (hider == "1") {
-//                    }
-
-//                    shopVisitModel.setPlaced(true);
-
-                    mAdapter.notifyDataSetChanged();
+//
+//                    ShopDetails shopVisitModel = shopVisitModelList.get(list_id);
+//
+//
+//                    mAdapter.notifyDataSetChanged();
 
 
                     break;

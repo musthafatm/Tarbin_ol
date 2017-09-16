@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:state_focused="true" android:drawable="@drawable/rounded_edit_text_stock_taking_embos"/>
+    <item android:state_focused="false" android:drawable="@drawable/rounded_edit_text_stock_taking"/>
+    <item android:drawable="@drawable/rounded_edit_text_stock_taking"/>
+</selector>
