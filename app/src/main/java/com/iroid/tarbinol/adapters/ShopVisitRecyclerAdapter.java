@@ -20,11 +20,16 @@ import java.util.List;
 
 public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecyclerAdapter.MyViewHolder> {
 
+    public static final int ITEM_STATE_PENDING = 1;
+    public static final int ITEM_STATE_VISITED = 2;
+    private  int state;
+
     private List<ShopDetails> shopVisitModelList;
     private OnItemClickListener onItemClickListener;
 
-    public ShopVisitRecyclerAdapter(List<ShopDetails> shopVisitModelList) {
+    public ShopVisitRecyclerAdapter(List<ShopDetails> shopVisitModelList,int state) {
         this.shopVisitModelList = shopVisitModelList;
+        this.state = state;
     }
 
 
@@ -53,7 +58,7 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
         holder.tvTick_Time.setText(currentTime);
 
         //****************/////////////////***************
-        if (shopVisitModel.getStatus().equalsIgnoreCase("1")) {
+        if (state == ITEM_STATE_VISITED && shopVisitModel.getStatus().equalsIgnoreCase("1") ) {
             holder.mLinearLayout.setVisibility(View.VISIBLE);
         } else {
             holder.mLinearLayout.setVisibility(View.INVISIBLE);

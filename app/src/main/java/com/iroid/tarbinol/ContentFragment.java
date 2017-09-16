@@ -53,7 +53,6 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
         rvDay = (RecyclerView) view.findViewById(R.id.rvDay);
         rvDay.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
         call = webService.chooseDay(AppPreferences.getStringData(getActivity(), AppPreferences.EMP_ID));
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -81,7 +80,7 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
 //                               System.out.println(day_Item);
 //                           }
 
-                           dayItems.add(new DayItem(jsonObject.get("days").getAsString(),
+                           dayItems.add(new DayItem(jsonObject.get("day").getAsString(),
                                    jsonObject.get("location").getAsString()));
 
 

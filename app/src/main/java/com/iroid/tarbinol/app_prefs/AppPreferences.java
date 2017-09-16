@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 public class AppPreferences {
     public static final String PREFERENCE_NAME = "Tarbin_ol";
     public static final String EMP_ID = "emp_id";
+    public static final String EMP_NAME = "emp_name";
 
     /**
      * @param context

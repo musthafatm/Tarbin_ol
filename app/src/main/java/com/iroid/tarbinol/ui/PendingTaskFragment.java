@@ -12,12 +12,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.iroid.tarbinol.App;
 import com.iroid.tarbinol.R;
 import com.iroid.tarbinol.adapters.ShopVisitRecyclerAdapter;
+import com.iroid.tarbinol.api.WebService;
+import com.iroid.tarbinol.app_prefs.AppPreferences;
+import com.iroid.tarbinol.model.CheckinResponseModel;
 import com.iroid.tarbinol.model.ShopDetails;
+import com.iroid.tarbinol.model.ShopVisitResponseModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.iroid.tarbinol.utils.CommonUtils.showToast;
 
 public class PendingTaskFragment extends Fragment {
 
@@ -27,10 +38,12 @@ public class PendingTaskFragment extends Fragment {
     private List<ShopDetails> shopVisitModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ShopVisitRecyclerAdapter mAdapter;
+    public String emp_name;
+    int i;
 
-    String[] shopName = {"Kerala Hardware Shop", "Jyothi Paint Shop", "Johnson Hardware Shop", "Indira Hardwares", "Matha Paint and Hardwares", "Peevees Hardwares", "Kareems Hardwares", "Mahatma Hardwares", "Aleena Hardwares and Paints"};
+  //  String[] shopName = {"Kerala Hardware Shop", "Jyothi Paint Shop", "Johnson Hardware Shop", "Indira Hardwares", "Matha Paint and Hardwares", "Peevees Hardwares", "Kareems Hardwares", "Mahatma Hardwares", "Aleena Hardwares and Paints"};
 
-    String[] shopLocation = {"Palarivattom,cochin", "Thammanam,cochin", "Thammanam South,cochin", "Padivattom,cochin", "Vyttila,cochin", "Punnurunni,cochin","Kuthappady,cochin","Naroth Road,cochin","Bavarapparambu,cochin"};
+   // String[] shopLocation = {"Palarivattom,cochin", "Thammanam,cochin", "Thammanam South,cochin", "Padivattom,cochin", "Vyttila,cochin", "Punnurunni,cochin","Kuthappady,cochin","Naroth Road,cochin","Bavarapparambu,cochin"};
 
     public PendingTaskFragment() {
         // Required empty public constructor
@@ -46,22 +59,22 @@ public class PendingTaskFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_shop_visit, container, false);
-
-
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
 
+        Bundle arguments = getArguments();
+        String day = arguments.getString("DAY");
 
+        callApi(day);
 
-        mAdapter = new ShopVisitRecyclerAdapter(shopVisitModelList);
+        mAdapter = new ShopVisitRecyclerAdapter(shopVisitModelList,ShopVisitRecyclerAdapter.ITEM_STATE_PENDING);
         mAdapter.setOnItemClickListener(new ShopVisitRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClicked(ShopDetails visitModel, int position) {
-                Toast.makeText(getActivity(), visitModel.getShopname(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), visitModel.getShopId(), Toast.LENGTH_SHORT).show();
 
-                Intent checkInIntent = new Intent(getActivity(), CheckinActivity.class);
-                checkInIntent.putExtra("shop",visitModel.getShopname());
-                checkInIntent.putExtra("list_id",position);
-                startActivityForResult(checkInIntent, REQUEST_RESULT);
+                callCheckInApi(visitModel, position);
+
+
             }
         });
         RecyclerView.LayoutManager mlayoutManager = new LinearLayoutManager(view.getContext());
@@ -70,6 +83,77 @@ public class PendingTaskFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
         return view;
 
+    }
+
+    private void callCheckInApi(final ShopDetails visitModel, final int position) {
+        WebService webService = App.getClient().create(WebService.class);
+        Call<CheckinResponseModel> call = webService.check_in_Task(AppPreferences.getStringData(getActivity(),
+                AppPreferences.EMP_ID), visitModel.getDays(), visitModel.getShopId());
+        call.enqueue(new Callback<CheckinResponseModel>() {
+            @Override
+            public void onResponse(Call<CheckinResponseModel> call, Response<CheckinResponseModel> response) {
+//                if (response.body().getStatus().equalsIgnoreCase("success")) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus().equalsIgnoreCase("success")) {
+                        String description = response.body().getData().get(0).getDescription();
+
+                        Intent checkInIntent = new Intent(getActivity(), CheckinActivity.class);
+                        checkInIntent.putExtra("shop", visitModel.getShopname());
+                        checkInIntent.putExtra("days", visitModel.getDays());
+                        checkInIntent.putExtra("list_id", position);
+                        checkInIntent.putExtra("shop_id", visitModel.getShopId());
+                        checkInIntent.putExtra("description", description);
+
+                        startActivityForResult(checkInIntent, REQUEST_RESULT);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<CheckinResponseModel> call, Throwable t) {
+                showToast(getActivity(), "NO_INTERNET_ACCESS");
+            }
+        });
+    }
+
+    private void callApi(String day) {
+
+
+        WebService webService = App.getClient().create(WebService.class);
+
+        Call<ShopVisitResponseModel> call = webService.todayTask(AppPreferences.getStringData(getActivity(),
+                AppPreferences.EMP_ID), day);
+
+        call.enqueue(new Callback<ShopVisitResponseModel>() {
+            @Override
+            public void onResponse(Call<ShopVisitResponseModel> call, Response<ShopVisitResponseModel> response) {
+
+                if (response.body().getStatus().equalsIgnoreCase("success")) {
+
+                    // Storing employee name from here ; to use it in ExecutiveNameActivity
+                    emp_name = response.body().getData().get(0).getName();
+                    AppPreferences.insertStringData(getActivity(), AppPreferences.EMP_NAME,emp_name);
+                    //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                    for (ShopDetails shopDetails : response.body().getData()) {
+                        if (shopDetails.getStatus().equalsIgnoreCase("0")) {
+                            shopVisitModelList.add(shopDetails);
+                        }
+                    }
+
+
+                    mAdapter.notifyDataSetChanged();
+
+                } else {
+                    showToast(getActivity(), "Response Failure");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ShopVisitResponseModel> call, Throwable t) {
+
+                showToast(getActivity(), "NO_NETWORK_ACCESS");
+            }
+        });
     }
 
     @Override

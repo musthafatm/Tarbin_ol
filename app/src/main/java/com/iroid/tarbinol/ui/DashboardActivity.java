@@ -85,12 +85,10 @@ public class DashboardActivity extends AppCompatActivity {
         PendingTaskFragment pendingTaskFragment = new PendingTaskFragment();
         pendingTaskFragment.setArguments(getIntent().getExtras());
 
-
         adapter.addFragment(shopVisitFragment, "Shop Visit");
         adapter.addFragment(pendingTaskFragment,"Pending Task");
         viewPager.setAdapter(adapter);
     }
-
 
 
 

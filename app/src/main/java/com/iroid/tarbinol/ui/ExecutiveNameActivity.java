@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.google.gson.JsonObject;
 import com.iroid.tarbinol.ContentFragment;
 import com.iroid.tarbinol.R;
+import com.iroid.tarbinol.app_prefs.AppPreferences;
 import com.iroid.tarbinol.utils.CommonUtils;
 
 import retrofit2.Call;
@@ -40,6 +41,9 @@ public class ExecutiveNameActivity extends AppCompatActivity
         setContentView(R.layout.activity_executive_name);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle(AppPreferences.getStringData(getApplicationContext(),
+                AppPreferences.EMP_ID));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

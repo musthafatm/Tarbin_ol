@@ -172,6 +172,7 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
                 alertDialog.dismiss();
 
                 showToast(getApplicationContext(),dataSuccess);
+                //showToast(getApplicationContext(),dataFailure);
                 setResult(RESULT_OK, getIntent());
                 finish();
             }
