@@ -1,5 +1,6 @@
 package com.iroid.tarbinol.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -42,8 +43,8 @@ public class ExecutiveNameActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle(AppPreferences.getStringData(getApplicationContext(),
-                AppPreferences.EMP_ID));
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -55,9 +56,19 @@ public class ExecutiveNameActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        loadFirstFrame();
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getSupportActionBar().setTitle(AppPreferences.getStringData(getApplicationContext(),
+                AppPreferences.EMP_ID ));
+
+        loadFirstFrame();
+
+    }
 
     private void loadFirstFrame() {
 
@@ -111,6 +122,9 @@ public class ExecutiveNameActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_info) {
+
+            Intent intent = new Intent(this, AboutInfoActivity.class);
+            startActivity(intent);
 
 
 

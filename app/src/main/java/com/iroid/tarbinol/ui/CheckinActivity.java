@@ -186,6 +186,9 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
                         checkInIntent.putExtra("shop_name_title", mtvCheckInShopName.getText().toString());
                         checkInIntent.putExtra("shop_id", shopId);
 
+                        checkInIntent.putExtra("server_date",jsonObj.get("date").getAsString());
+                        checkInIntent.putExtra("server_Time",jsonObj.get("Time").getAsString());
+
                         startActivityForResult(checkInIntent, REQUEST_CANCEL);
 
                     } else {

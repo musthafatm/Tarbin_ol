@@ -55,6 +55,9 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
     String dataFailure ="";
 
     Boolean flag;
+    String date_server;
+    String time_server;
+
 
    /* String[] paint_name = {"Asian paints","Asian paints","Asian paints","Asian paints", "Asian paints","Asian paints","Asian paints","Asian paints","Asian paints"};
     String[] paint_describe = {"apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex","apex duracast pebbletex"};
@@ -72,6 +75,10 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
         Bundle extras = getIntent().getExtras();
         String shopNameTitle = extras.getString("shop_name_title");
         shopId = extras.getString("shop_id");
+
+        date_server = extras.getString("date");
+        time_server = extras.getString("Time");
+
         getSupportActionBar().setTitle(shopNameTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

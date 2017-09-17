@@ -30,6 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.iroid.tarbinol.ui.DashboardActivity.toCamelCase;
 import static com.iroid.tarbinol.utils.CommonUtils.showToast;
 
 public class ShopVisitFragment extends Fragment {
@@ -39,9 +40,11 @@ public class ShopVisitFragment extends Fragment {
     private List<CheckInDetails> checkInDetailsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ShopVisitRecyclerAdapter mAdapter;
-    int i;
 
-    public String emp_name;
+
+    public String emp_name = "Executive Name";
+    public String srvrDate = "date Name";
+    public String srvrTime = "time Name";
 
     /*
      String[] shopName = {"Kerala Hardware Shop", "Jyothi Paint Shop", "Johnson Hardware Shop", "Indira Hardwares", "Matha Paint and Hardwares", "Peevees Hardwares", "Kareems Hardwares", "Mahatma Hardwares", "Aleena Hardwares and Paints"};
@@ -61,6 +64,8 @@ public class ShopVisitFragment extends Fragment {
         super.onResume();
         Bundle arguments = getArguments();
         String day = arguments.getString("DAY");
+       srvrDate = arguments.getString("date");
+        srvrTime = arguments.getString("Time");
         callApi(day);
     }
 
@@ -73,7 +78,7 @@ public class ShopVisitFragment extends Fragment {
 
 //        callCheckInApi(day);
 
-        mAdapter = new ShopVisitRecyclerAdapter(shopVisitModelList, ShopVisitRecyclerAdapter.ITEM_STATE_VISITED);
+        mAdapter = new ShopVisitRecyclerAdapter(shopVisitModelList, ShopVisitRecyclerAdapter.ITEM_STATE_VISITED, srvrDate, srvrTime);
         mAdapter.setOnItemClickListener(new ShopVisitRecyclerAdapter.OnItemClickListener() {
             //******-----------------**************
             @Override
@@ -123,7 +128,7 @@ public class ShopVisitFragment extends Fragment {
 
             @Override
             public void onFailure(Call<CheckinResponseModel> call, Throwable t) {
-                showToast(getActivity(), "NO_INTERNET_ACCESS");
+                showToast(getActivity(), "Server Access Denied");
             }
         });
     }
@@ -145,13 +150,20 @@ public class ShopVisitFragment extends Fragment {
                 if (response.body().getStatus().equalsIgnoreCase("success")) {
 
                     // Storing employee name from here ; to use it in ExecutiveNameActivity
-                    emp_name = response.body().getData().get(0).getName();
-                    AppPreferences.insertStringData(getActivity(), AppPreferences.EMP_NAME, emp_name);
+
+            /*        emp_name = response.body().getData().get(0).getName();
+
+                    AppPreferences.insertStringData(getActivity(), AppPreferences.EMP_NAME, emp_name);*/
                     //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 //
                     shopVisitModelList.clear();
-                    shopVisitModelList.addAll(response.body().getData());
+                   // shopVisitModelList.addAll(response.body().getData());
+                    for (ShopDetails shopDetails : response.body().getData()) {
+                        if (shopDetails.getStatus().equalsIgnoreCase("1")) {
+                            shopVisitModelList.add(shopDetails);
+                        }
+                    }
 
                     mAdapter.notifyDataSetChanged();
 
@@ -165,7 +177,7 @@ public class ShopVisitFragment extends Fragment {
             @Override
             public void onFailure(Call<ShopVisitResponseModel> call, Throwable t) {
 
-                showToast(getActivity(), "NO_NETWORK_ACCESS");
+                showToast(getActivity(), "Server Access Denied");
             }
         });
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/list_grad"
+    android:gravity="center_vertical"
+    tools:context="com.iroid.tarbinol.ui.AboutInfoActivity">
+
+
+    <TextView
+        android:id="@+id/tvInfo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TARBINOL"
+        android:textStyle="bold"
+        android:paddingStart="@dimen/padding_normal"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_very_large"/>
+
+    <TextView
+        android:id="@+id/tvInfo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version 1.0"
+        android:textStyle="italic"
+        android:textColor="@color/black"
+        android:paddingTop="@dimen/padding_small"
+        android:paddingStart="@dimen/padding_small"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/font_medium"/>
+
+    <ImageView
+        android:id="@+id/imageViewInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="@dimen/padding_extra_large"
+        android:paddingStart="@dimen/padding_large"
+        android:paddingBottom="@dimen/padding_very_large"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/tvInfo3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2017-2018 Tarbinol Inc."
+        android:textColor="@color/black"
+        android:paddingBottom="@dimen/padding_small"
+        android:paddingStart="@dimen/padding_very_large"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/font_medium" />
+
+    <TextView
+        android:id="@+id/tvInfo4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All rights reserved."
+        android:textColor="@color/black"
+        android:paddingStart="@dimen/padding_large"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/font_medium" />
+</LinearLayout>

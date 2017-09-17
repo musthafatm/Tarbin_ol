@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/list_grad"
     tools:context="com.iroid.tarbinol.ui.CheckinActivity">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/padding_normal">
+    <!--android:background="@drawable/list_grad"-->
+
 
     <!--<include layout="@layout/tool_bar"/>-->
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -21,7 +31,8 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
 
 
     </android.support.design.widget.AppBarLayout>
@@ -35,6 +46,10 @@
         android:layout_marginStart="@dimen/margin_extra_large"
         android:orientation="vertical">
 
+        <!--newly added layout is below-->
+
+
+
 
         <TextView
             android:id="@+id/tvCheckInShopName"
@@ -42,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_very_large"
             android:paddingStart="@dimen/padding_normal"
+            android:layout_gravity="center_horizontal"
             android:textColor="@color/white"
             android:textSize="@dimen/font_very_large" />
 
@@ -49,6 +65,7 @@
             android:id="@+id/tvCheckInShopDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/spacing_large"
             android:layout_marginTop="@dimen/spacing_large"
             android:drawableLeft="@drawable/ic_place_localizer"
@@ -67,6 +84,7 @@
                 android:id="@+id/tvcheckInDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginEnd="@dimen/margin_normal"
                 android:drawableLeft="@drawable/ic_calendar"
                 android:drawablePadding="@dimen/padding_normal"
@@ -78,6 +96,7 @@
                 android:id="@+id/tvcheckInTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:drawableLeft="@drawable/ic_clock"
                 android:drawablePadding="@dimen/padding_normal"
                 android:gravity="center|left"
@@ -95,6 +114,8 @@
             android:layout_marginStart="@dimen/margin_very_small"
             android:layout_marginTop="@dimen/margin_extra_large"
             android:background="@color/darkgreen"></FrameLayout>
+
+
 
         <!--<Button-->
         <!--android:id="@+id/checkin_button"-->
@@ -154,3 +175,5 @@
     </LinearLayout>
 
 </LinearLayout>
+
+    </ScrollView>

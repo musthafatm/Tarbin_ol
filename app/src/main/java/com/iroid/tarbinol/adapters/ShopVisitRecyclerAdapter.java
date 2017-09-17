@@ -23,13 +23,17 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
     public static final int ITEM_STATE_PENDING = 1;
     public static final int ITEM_STATE_VISITED = 2;
     private  int state;
+    private  String srvr_Date;
+    private  String srvr_Time;
 
     private List<ShopDetails> shopVisitModelList;
     private OnItemClickListener onItemClickListener;
 
-    public ShopVisitRecyclerAdapter(List<ShopDetails> shopVisitModelList,int state) {
+    public ShopVisitRecyclerAdapter(List<ShopDetails> shopVisitModelList,int state, String srvr_Date,String srvr_Time) {
         this.shopVisitModelList = shopVisitModelList;
         this.state = state;
+        this.srvr_Date = srvr_Date;
+        this.srvr_Time = srvr_Time;
     }
 
 
@@ -48,14 +52,23 @@ public class ShopVisitRecyclerAdapter extends RecyclerView.Adapter<ShopVisitRecy
         holder.dashBoardShopName.setText(shopVisitModel.getShopname());
         holder.dashBoardLocation.setText(shopVisitModel.getCity() + ", " + shopVisitModel.getPlace());
 
+        //DATE  >>>>>>>>>>>>EDITING
+
+        if(srvr_Date == "date Name" && srvr_Time == "time Name") {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh-mm a");
         Date date = new Date();
         String currentDate = simpleDateFormat.format(date);
         String currentTime = simpleTimeFormat.format(date);
+            holder.tvTick_Date.setText(currentDate);
+            holder.tvTick_Time.setText(currentTime);
 
-        holder.tvTick_Date.setText(currentDate);
-        holder.tvTick_Time.setText(currentTime);
+        }else {
+            holder.tvTick_Date.setText(srvr_Date);
+            holder.tvTick_Time.setText(srvr_Time);
+        }
+        //DATE  >>>>>>>>>>>>EDITING
+
 
         //****************/////////////////***************
         if (state == ITEM_STATE_VISITED && shopVisitModel.getStatus().equalsIgnoreCase("1") ) {

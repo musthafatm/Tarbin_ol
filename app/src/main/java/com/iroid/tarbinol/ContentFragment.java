@@ -43,17 +43,18 @@ import static com.iroid.tarbinol.utils.CommonUtils.showToast;
 public class ContentFragment extends Fragment implements View.OnClickListener{
 
     RecyclerView rvDay;
+    String employeeId = "1";
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                                 @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.content_executive_name, container, false);
+    public void onResume() {
+        super.onResume();
 
-        rvDay = (RecyclerView) view.findViewById(R.id.rvDay);
-        rvDay.setLayoutManager(new LinearLayoutManager(getActivity()));
+        employeeId = AppPreferences.getStringData(getActivity(), AppPreferences.EMP_ID);
+        callApi(employeeId);
+    }
 
-        call = webService.chooseDay(AppPreferences.getStringData(getActivity(), AppPreferences.EMP_ID));
+    private void callApi(String employeeId) {
+        call = webService.chooseDay(employeeId);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -65,9 +66,9 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
 
                         List<DayItem> dayItems = new ArrayList<DayItem>();
                         JsonArray jsonArray = jsonObj.get("data").getAsJsonArray();
-                       for (int i = 0; i < jsonArray.size(); i++){
+                        for (int i = 0; i < jsonArray.size(); i++){
 
-                           JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
+                            JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
 
 //                           dayItems.add(new DayItem(jsonObject.get("days").getAsString(), jsonObject.get("location").getAsString()));
 
@@ -80,11 +81,11 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
 //                               System.out.println(day_Item);
 //                           }
 
-                           dayItems.add(new DayItem(jsonObject.get("day").getAsString(),
-                                   jsonObject.get("location").getAsString()));
+                            dayItems.add(new DayItem(jsonObject.get("day").getAsString(),
+                                    jsonObject.get("location").getAsString()));
 
 
-                       }
+                        }
 
 
                         DayAdapter dayAdapter = new DayAdapter(dayItems, getActivity());
@@ -101,9 +102,22 @@ public class ContentFragment extends Fragment implements View.OnClickListener{
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                showToast(getActivity(), "No_Network_ACCESS");
+                Toast.makeText(getActivity(),"Server Access Denied",Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                                 @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.content_executive_name, container, false);
+
+        rvDay = (RecyclerView) view.findViewById(R.id.rvDay);
+        rvDay.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
 

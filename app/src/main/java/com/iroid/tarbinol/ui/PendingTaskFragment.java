@@ -38,8 +38,11 @@ public class PendingTaskFragment extends Fragment {
     private List<ShopDetails> shopVisitModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ShopVisitRecyclerAdapter mAdapter;
-    public String emp_name;
-    int i;
+    public String emp_name = "Executive Name";
+
+    public String srvrDate = "date Name";
+    public String srvrTime = "time Name";
+
 
   //  String[] shopName = {"Kerala Hardware Shop", "Jyothi Paint Shop", "Johnson Hardware Shop", "Indira Hardwares", "Matha Paint and Hardwares", "Peevees Hardwares", "Kareems Hardwares", "Mahatma Hardwares", "Aleena Hardwares and Paints"};
 
@@ -61,6 +64,9 @@ public class PendingTaskFragment extends Fragment {
         Bundle arguments = getArguments();
         String day = arguments.getString("DAY");
 
+        srvrDate = arguments.getString("date");
+        srvrTime = arguments.getString("Time");
+
         callApi(day);
     }
 
@@ -72,7 +78,7 @@ public class PendingTaskFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
 
 
-        mAdapter = new ShopVisitRecyclerAdapter(shopVisitModelList,ShopVisitRecyclerAdapter.ITEM_STATE_PENDING);
+        mAdapter = new ShopVisitRecyclerAdapter(shopVisitModelList,ShopVisitRecyclerAdapter.ITEM_STATE_PENDING, srvrDate, srvrTime);
         mAdapter.setOnItemClickListener(new ShopVisitRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClicked(ShopDetails visitModel, int position) {
@@ -136,8 +142,9 @@ public class PendingTaskFragment extends Fragment {
                 if (response.body().getStatus().equalsIgnoreCase("success")) {
 
                     // Storing employee name from here ; to use it in ExecutiveNameActivity
-                    emp_name = response.body().getData().get(0).getName();
-                    AppPreferences.insertStringData(getActivity(), AppPreferences.EMP_NAME,emp_name);
+
+               /*     emp_name = response.body().getData().get(0).getName();
+                    AppPreferences.insertStringData(getActivity(), AppPreferences.EMP_NAME,emp_name);*/
                     //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                     shopVisitModelList.clear();
                     for (ShopDetails shopDetails : response.body().getData()) {
@@ -158,7 +165,7 @@ public class PendingTaskFragment extends Fragment {
             @Override
             public void onFailure(Call<ShopVisitResponseModel> call, Throwable t) {
 
-                showToast(getActivity(), "NO_NETWORK_ACCESS");
+                showToast(getActivity(), "Server Access Denied");
             }
         });
     }

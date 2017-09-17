@@ -23,9 +23,7 @@ public class DashboardActivity extends AppCompatActivity {
     private Toolbar mtoolbar;
     private TabLayout mtabLayout;
     private ViewPager mviewPager;
-    public String city;
-    public String place;
-    public String ShopName;
+
 
 
     @Override
