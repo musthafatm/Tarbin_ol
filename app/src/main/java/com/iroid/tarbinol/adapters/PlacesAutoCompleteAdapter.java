@@ -1,3 +1,4 @@
+/*
 package com.iroid.tarbinol.adapters;
 
 import android.content.Context;
@@ -9,9 +10,11 @@ import com.iroid.tarbinol.ui.PlaceAPI;
 
 import java.util.ArrayList;
 
+*/
 /**
  * Created by Acer on 19-Sep-17.
- */
+ *//*
+
 
 public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
 
@@ -70,3 +73,4 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements F
     }
 
 }
+*/

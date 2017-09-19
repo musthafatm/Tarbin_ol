@@ -1,17 +1,19 @@
 package com.iroid.tarbinol.ui;
 
 import android.Manifest;
-import android.content.Context;
+//import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
+//import android.location.Address;
+//import android.location.Geocoder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+//import android.view.View;
+//import android.widget.AdapterView;
+//import android.widget.AutoCompleteTextView;
+//import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,14 +22,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.iroid.tarbinol.R;
-import com.iroid.tarbinol.adapters.PlacesAutoCompleteAdapter;
-
-import java.io.IOException;
-import java.util.List;
+//import com.iroid.tarbinol.adapters.PlacesAutoCompleteAdapter;
+//
+//import java.io.IOException;
+//import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap = null;
+    private Toolbar mToolbar;
+
 
 
     @Override
@@ -36,12 +40,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
 
 
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
 
-        AutoCompleteTextView autocompleteView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
+       /* AutoCompleteTextView autocompleteView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
         autocompleteView.setAdapter(new PlacesAutoCompleteAdapter(getApplicationContext(), R.layout.autocomplete_list_item));
 
         autocompleteView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -54,11 +64,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 LatLng loc = getLocationFromAddress(getApplicationContext(),description);
 
-            /*    if(myMarker!=null)
+            *//*    if(myMarker!=null)
                 {
                     myMarker.remove();
                     myMarker = null;
-                }*/
+                }*//*
 
 
 
@@ -69,9 +79,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+*/    }
+
+
+    // Up-Enabled action given by following code
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
-
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -91,7 +112,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
 
-    public LatLng getLocationFromAddress(Context context, String inputtedAddress) {
+    /*public LatLng getLocationFromAddress(Context context, String inputtedAddress) {
 
         Geocoder coder = new Geocoder(context);
         List<Address> address;
@@ -124,6 +145,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-
+*/
 
 }
