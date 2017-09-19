@@ -48,4 +48,8 @@
     <string name="apex_duracast_pebbletex">apex duracast pebbletex</string>
     <string name="required">Required</string>
     <string name="in_stock">In Stock</string>
+
+
+
+    <string name="google_maps_key">AIzaSyDXcAj4tByHgf7qK-oaNVo1913IbZb_Tsc</string>
 </resources>

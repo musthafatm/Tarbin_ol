@@ -5,7 +5,7 @@
     style="@style/FullScreenAppTheme"
     android:background="@drawable/list_grad"
     android:orientation="vertical">
-    tools:context="com.iroid.tarbinol.ui.SplashScreen">
+    <!--tools:context="com.iroid.tarbinol.ui.SplashScreen">-->
 
 
     <ImageView

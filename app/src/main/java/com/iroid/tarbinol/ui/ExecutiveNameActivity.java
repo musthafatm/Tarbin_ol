@@ -36,6 +36,8 @@ import static com.iroid.tarbinol.utils.CommonUtils.showToast;
 public class ExecutiveNameActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +54,9 @@ public class ExecutiveNameActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
 
 
@@ -66,6 +69,7 @@ public class ExecutiveNameActivity extends AppCompatActivity
         getSupportActionBar().setTitle(AppPreferences.getStringData(getApplicationContext(),
                 AppPreferences.EMP_ID ));
 
+        navigationView.getMenu().getItem(0).setChecked(true);
         loadFirstFrame();
 
     }
@@ -148,9 +152,11 @@ public class ExecutiveNameActivity extends AppCompatActivity
 
         }
 
-//        else if (id == R.id.nav_slideshow) {
-//
-//         }
+        else if (id == R.id.nav_slideshow) {
+
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
+         }
 // else if (id == R.id.nav_manage) {
 //
 //        } else if (id == R.id.nav_share) {
