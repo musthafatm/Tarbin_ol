@@ -122,7 +122,7 @@ public class PendingTaskFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<CheckinResponseModel> call, Throwable t) {
-                showToast(getActivity(), "NO_INTERNET_ACCESS");
+                showToast(getActivity(), "Server Access Denied");
             }
         });
     }

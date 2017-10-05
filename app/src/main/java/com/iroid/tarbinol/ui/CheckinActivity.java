@@ -192,14 +192,14 @@ public class CheckinActivity extends AppCompatActivity implements View.OnClickLi
                         startActivityForResult(checkInIntent, REQUEST_CANCEL);
 
                     } else {
-                        String msg = jsonObj.get("message").getAsString();
+                        String msg = jsonObj.get("data").getAsString();
                         CommonUtils.showToast(getApplicationContext(), msg);
                     }
                 }
             }
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                showToast(CheckinActivity.this, "No_Network_ACCESS");
+                showToast(CheckinActivity.this, "Server Access Denied");
             }
         });
     }

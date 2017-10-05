@@ -110,7 +110,8 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
             public void onResponse(Call<ProductDisplayResponseModel> call, Response<ProductDisplayResponseModel> response) {
 
                 if (response.isSuccessful()) {
-                    if (response.body().getStatus().equalsIgnoreCase("success")) {
+                    if (response.body().getStatus().equalsIgnoreCase("success")){
+
 
                         productDetailsList.addAll(response.body().getData());
 
@@ -124,13 +125,17 @@ public class StockTakingActivity extends AppCompatActivity implements View.OnCli
 //                        checkInIntent.putExtra("description", description);
 //                        startActivityForResult(checkInIntent, REQUEST_RESULT);
                     }else {
-                        showToast(getApplicationContext(), "Response Failure");
+                    showToast(getApplicationContext(), "No Result found");
                     }
+
+
+
+
                 }
             }
             @Override
             public void onFailure(Call<ProductDisplayResponseModel> call, Throwable t) {
-                showToast(getApplicationContext(), "NO_INTERNET_ACCESS");
+                showToast(getApplicationContext(), "Server Data Null");
             }
         });
     }
