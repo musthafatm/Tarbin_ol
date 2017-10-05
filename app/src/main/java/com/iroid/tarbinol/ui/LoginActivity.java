@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button mloginButton = null;
 
     public static String empId;
+    public static String emp_name;
 
     public static WebService webService;
     public static Call<JsonObject> call;
@@ -72,9 +73,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mloginButton.setOnClickListener(this);
     }
 
+
+
     //For Permission :New Addition
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
@@ -92,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-                    builder.setMessage("This permission is important to record audio.")
+                    builder.setMessage("This permission is important")
                             .setTitle("Important permission required");
 
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -115,13 +116,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
     }
-
-
-
-
-
-
-
 
 
     @Override
@@ -147,9 +141,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     String status = jsonObj.get("status").getAsString();
                     if(status.equals("success")) {
                         empId = jsonObj.get("employee_id").getAsString();
-                        showToast(LoginActivity.this, "Logged in successfully " + empId);
+                        emp_name = jsonObj.get("name").getAsString();
+                        showToast(LoginActivity.this, emp_name + ": Logged in successfully ");
                         Intent intent = new Intent(LoginActivity.this, ExecutiveNameActivity.class);
                         AppPreferences.insertStringData(LoginActivity.this, AppPreferences.EMP_ID,empId);
+                        AppPreferences.insertStringData(LoginActivity.this, AppPreferences.EMP_NAME,emp_name);
                         startActivity(intent);
                     }else{
                         String msg = jsonObj.get("message").getAsString();

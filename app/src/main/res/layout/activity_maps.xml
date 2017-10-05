@@ -34,6 +34,8 @@
         <!--android:hint="Tarbinol"-->
         <!--android:textColorHint="@color/black"/>-->
 
+
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
@@ -78,6 +80,9 @@
             android:drawableLeft="@drawable/ic_phone_black_24dp"
             android:text=": 8907596439"/>
     </LinearLayout>
+
+
+
 
     <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->

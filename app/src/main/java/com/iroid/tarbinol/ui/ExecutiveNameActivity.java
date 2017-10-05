@@ -67,7 +67,7 @@ public class ExecutiveNameActivity extends AppCompatActivity
         super.onResume();
 
         getSupportActionBar().setTitle(AppPreferences.getStringData(getApplicationContext(),
-                AppPreferences.EMP_ID ));
+                AppPreferences.EMP_NAME ));
 
         navigationView.getMenu().getItem(0).setChecked(true);
         loadFirstFrame();
